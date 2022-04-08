@@ -1,10 +1,10 @@
-package com.example;
+package com.example.bj_isfp_backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class BjIsfpBackendApplicationTests {
 
     @Test
     void contextLoads() {
