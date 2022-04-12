@@ -9,7 +9,12 @@ import lombok.Getter;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ErrorCode {
 
-    BAD_REQUEST(400, "CLIENT-400-1", "Bad Request");
+    BAD_REQUEST(400, "CLIENT-400-1", "Bad Request"),
+
+    USER_NOT_FOUND(404, "USER-404-1", "User Not Found"),
+
+    EXPIRED_JWT(401, "JWT-401-1", "Expired Jwt"),
+    INVALID_JWT(401, "JWT-401-2", "Invalid Jwt");
 
     private final int status;
     private final String code;
