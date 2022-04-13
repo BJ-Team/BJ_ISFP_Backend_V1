@@ -50,4 +50,8 @@ public class User extends BaseTimeEntity {
         this.place = place;
         if (sex != null) this.sex = sex;
     }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
 }
