@@ -1,7 +1,6 @@
 package com.example.bj_isfp_backend.global.security.auth;
 
 import com.example.bj_isfp_backend.domain.user.domain.repository.UserRepository;
-import com.example.bj_isfp_backend.domain.user.exceptin.UserNotFoundException;
 import com.example.bj_isfp_backend.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
