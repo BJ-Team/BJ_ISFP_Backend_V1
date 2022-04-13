@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Component
@@ -73,6 +74,10 @@ public class JwtTokenProvider {
 
         UserDetails userDetails = getUserDetails(body);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+
+    public LocalDateTime getExpiredTime() {
+        return LocalDateTime.now().plusSeconds(jwtProperties.getAccessExp());
     }
 
     private Claims getBody(String token) {
