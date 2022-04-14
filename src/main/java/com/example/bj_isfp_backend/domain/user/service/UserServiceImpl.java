@@ -6,9 +6,10 @@ import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.domain.repository.UserRepository;
 import com.example.bj_isfp_backend.domain.user.exception.InvalidUserException;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.UpdatePasswordRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.LoginRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.SignUpRequest;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.UpdatePasswordRequest;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.UpdatePlaceRequest;
 import com.example.bj_isfp_backend.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -71,5 +72,14 @@ public class UserServiceImpl implements UserService {
             throw InvalidUserException.EXCEPTION;
 
         user.updatePassword(changePasswordRequest.getNewPassword());
+    }
+
+    @Override
+    @Transactional
+    public void updatePlace(UpdatePlaceRequest updatePlaceRequest) {
+
+        User user = userFacade.getCurrentUser();
+
+        user.updatePlace(updatePlaceRequest.getPlace());
     }
 }
