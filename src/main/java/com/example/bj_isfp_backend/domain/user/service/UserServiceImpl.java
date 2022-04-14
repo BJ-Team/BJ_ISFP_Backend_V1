@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(
                 User.builder()
-                        .user_id(signUpRequest.getUser_id())
+                        .accountId(signUpRequest.getAccountId())
                         .password(passwordEncoder.encode(signUpRequest.getPassword()))
                         .name(signUpRequest.getName())
                         .place(signUpRequest.getPlace())
@@ -42,15 +42,15 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public TokenResponse login(LoginRequest loginRequest) {
 
-        User user = userFacade.getByUser_id(loginRequest.getUser_id());
+        User user = userFacade.getByUser_id(loginRequest.getAccountId());
 
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword()))
             throw PasswordNotCorrectException.EXCEPTION;
 
         user.setDeviceToken(loginRequest.getDeviceToken());
 
-        String access = jwtTokenProvider.generateAccessToken(loginRequest.getUser_id());
-        String refresh = jwtTokenProvider.generateRefreshToken(loginRequest.getUser_id());
+        String access = jwtTokenProvider.generateAccessToken(loginRequest.getAccountId());
+        String refresh = jwtTokenProvider.generateRefreshToken(loginRequest.getAccountId());
 
         return TokenResponse.builder()
                 .accessToken(access)

@@ -25,7 +25,7 @@ public class User extends BaseTimeEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String user_id;
+    private String accountId;
 
     @Column(length = 30, nullable = false)
     private String password;
@@ -43,8 +43,8 @@ public class User extends BaseTimeEntity {
     private String deviceToken;
 
     @Builder
-    public User(String user_id, String password, String name, String place, Sex sex) {
-        this.user_id = user_id;
+    public User(String accountId, String password, String name, String place, Sex sex) {
+        this.accountId = accountId;
         this.password = password;
         this.name = name;
         this.place = place;

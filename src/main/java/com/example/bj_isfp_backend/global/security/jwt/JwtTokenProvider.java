@@ -26,27 +26,27 @@ public class JwtTokenProvider {
     private final AuthDetailsService authDetailsService;
     private final RefreshTokenRepository refreshTokenRepository;
 
-    private String generateToken(String user_id, String type, Long exp) {
+    private String generateToken(String accountId, String type, Long exp) {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
-                .setSubject(user_id)
+                .setSubject(accountId)
                 .claim("typ", type)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
                 .compact();
     }
 
-    public String generateAccessToken(String user_id) {
-        return generateToken(user_id, "access", jwtProperties.getAccessExp());
+    public String generateAccessToken(String accountId) {
+        return generateToken(accountId, "access", jwtProperties.getAccessExp());
     }
 
-    public String generateRefreshToken(String user_id) {
+    public String generateRefreshToken(String accountId) {
 
-        String refresh = generateToken(user_id, "refresh", jwtProperties.getRefreshExp());
+        String refresh = generateToken(accountId, "refresh", jwtProperties.getRefreshExp());
 
         refreshTokenRepository.save(
                 RefreshToken.builder()
-                        .user_id(user_id)
+                        .user_id(accountId)
                         .token(refresh)
                         .ttl(jwtProperties.getRefreshExp())
                         .build());

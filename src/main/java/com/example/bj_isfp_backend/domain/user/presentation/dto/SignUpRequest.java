@@ -11,8 +11,8 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 public class SignUpRequest {
 
-    @NotBlank(message = "user_id는 필수 입력입니다.")
-    private String user_id;
+    @NotBlank(message = "accountId는 필수 입력입니다.")
+    private String accountId;
 
     @NotBlank(message = "password는 필수 입력입니다.")
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}$",

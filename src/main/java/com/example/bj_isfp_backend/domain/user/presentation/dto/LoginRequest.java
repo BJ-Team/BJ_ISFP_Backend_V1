@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class LoginRequest {
 
-    @NotBlank(message = "user_id는 필수 입력입니다.")
-    private String user_id;
+    @NotBlank(message = "accountId는 필수 입력입니다.")
+    private String accountId;
 
     @NotBlank(message = "password는 필수 입력입니다.")
     private String password;
