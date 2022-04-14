@@ -4,7 +4,9 @@ import com.example.bj_isfp_backend.domain.auth.exception.PasswordNotCorrectExcep
 import com.example.bj_isfp_backend.domain.auth.presentation.dto.TokenResponse;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.domain.repository.UserRepository;
+import com.example.bj_isfp_backend.domain.user.exception.InvalidUserException;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.UpdatePasswordRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.LoginRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.SignUpRequest;
 import com.example.bj_isfp_backend.global.security.jwt.JwtTokenProvider;
@@ -42,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public TokenResponse login(LoginRequest loginRequest) {
 
-        User user = userFacade.getByUser_id(loginRequest.getAccountId());
+        User user = userFacade.getByAccountId(loginRequest.getAccountId());
 
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword()))
             throw PasswordNotCorrectException.EXCEPTION;
@@ -57,5 +59,17 @@ public class UserServiceImpl implements UserService {
                 .expired_at(jwtTokenProvider.getExpiredTime())
                 .refreshToken(refresh)
                 .build();
+    }
+
+    @Override
+    @Transactional
+    public void updatePassword(UpdatePasswordRequest changePasswordRequest) {
+
+        User user = userFacade.getCurrentUser();
+
+        if (!user.getAccountId().equals(changePasswordRequest.getAccountId()))
+            throw InvalidUserException.EXCEPTION;
+
+        user.updatePassword(changePasswordRequest.getNewPassword());
     }
 }
