@@ -3,6 +3,7 @@ package com.example.bj_isfp_backend.domain.user.presentation;
 import com.example.bj_isfp_backend.domain.auth.presentation.dto.TokenResponse;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.LoginRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.SignUpRequest;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.UpdatePasswordRequest;
 import com.example.bj_isfp_backend.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,5 +28,10 @@ public class UserController {
     @PostMapping("/token")
     public TokenResponse token(@RequestBody @Valid LoginRequest loginRequest) {
         return userService.login(loginRequest);
+    }
+
+    @PostMapping("/password")
+    public void password(@RequestBody @Valid UpdatePasswordRequest updatePasswordRequest) {
+        userService.updatePassword(updatePasswordRequest);
     }
 }
