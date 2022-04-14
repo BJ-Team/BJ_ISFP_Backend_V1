@@ -6,6 +6,7 @@ import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.domain.repository.UserRepository;
 import com.example.bj_isfp_backend.domain.user.exception.InvalidUserException;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.DuplicateNameCheckRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.LoginRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.SignUpRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.UpdatePasswordRequest;
@@ -81,5 +82,11 @@ public class UserServiceImpl implements UserService {
         User user = userFacade.getCurrentUser();
 
         user.updatePlace(updatePlaceRequest.getPlace());
+    }
+
+    @Override
+    @Transactional
+    public void duplicateNameCheck(DuplicateNameCheckRequest duplicateNameCheckRequest) {
+        userFacade.nameAlreadyExists(duplicateNameCheckRequest.getName());
     }
 }
