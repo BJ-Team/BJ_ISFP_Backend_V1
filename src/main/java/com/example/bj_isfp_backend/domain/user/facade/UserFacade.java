@@ -19,8 +19,8 @@ public class UserFacade {
         return getByAccountId(accountId);
     }
 
-    public void nameAlreadyExists(String accountId) {
-        userRepository.findByAccountId(accountId)
+    public void nameAlreadyExists(String name) {
+        userRepository.findByName(name)
                 .orElseThrow(() -> NameAlreadyExistsException.EXCEPTION);
     }
 

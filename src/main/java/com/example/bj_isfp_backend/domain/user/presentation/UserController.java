@@ -1,6 +1,7 @@
 package com.example.bj_isfp_backend.domain.user.presentation;
 
 import com.example.bj_isfp_backend.domain.auth.presentation.dto.TokenResponse;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.DuplicateNameCheckRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.LoginRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.SignUpRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.UpdatePasswordRequest;
@@ -39,5 +40,10 @@ public class UserController {
     @PostMapping("/place")
     public void place(@RequestBody @Valid UpdatePlaceRequest updatePlaceRequest) {
         userService.updatePlace(updatePlaceRequest);
+    }
+
+    @PostMapping("/name")
+    public void name(@RequestBody @Valid DuplicateNameCheckRequest duplicateNameCheckRequest) {
+        userService.duplicateNameCheck(duplicateNameCheckRequest);
     }
 }
