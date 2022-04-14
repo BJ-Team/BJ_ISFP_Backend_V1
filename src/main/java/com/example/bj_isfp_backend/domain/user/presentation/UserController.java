@@ -4,6 +4,7 @@ import com.example.bj_isfp_backend.domain.auth.presentation.dto.TokenResponse;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.LoginRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.SignUpRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.UpdatePasswordRequest;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.UpdatePlaceRequest;
 import com.example.bj_isfp_backend.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,5 +34,10 @@ public class UserController {
     @PostMapping("/password")
     public void password(@RequestBody @Valid UpdatePasswordRequest updatePasswordRequest) {
         userService.updatePassword(updatePasswordRequest);
+    }
+
+    @PostMapping("/place")
+    public void place(@RequestBody @Valid UpdatePlaceRequest updatePlaceRequest) {
+        userService.updatePlace(updatePlaceRequest);
     }
 }
