@@ -54,4 +54,8 @@ public class User extends BaseTimeEntity {
     public void setDeviceToken(String deviceToken) {
         this.deviceToken = deviceToken;
     }
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
 }
