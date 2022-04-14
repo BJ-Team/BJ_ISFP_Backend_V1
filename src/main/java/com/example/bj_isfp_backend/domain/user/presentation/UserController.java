@@ -6,8 +6,11 @@ import com.example.bj_isfp_backend.domain.user.presentation.dto.SignUpRequest;
 import com.example.bj_isfp_backend.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,12 +20,12 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public void register(SignUpRequest signUpRequest) {
+    public void register(@RequestBody @Valid SignUpRequest signUpRequest) {
         userService.signUp(signUpRequest);
     }
 
     @PostMapping("/token")
-    public TokenResponse token(LoginRequest loginRequest) {
+    public TokenResponse token(@RequestBody @Valid LoginRequest loginRequest) {
         return userService.login(loginRequest);
     }
 }
