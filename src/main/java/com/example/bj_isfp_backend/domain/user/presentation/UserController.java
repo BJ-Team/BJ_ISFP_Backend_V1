@@ -8,9 +8,11 @@ import com.example.bj_isfp_backend.domain.user.presentation.dto.UpdatePasswordRe
 import com.example.bj_isfp_backend.domain.user.presentation.dto.UpdatePlaceRequest;
 import com.example.bj_isfp_backend.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -22,6 +24,7 @@ public class UserController {
 
     private final UserService userService;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/register")
     public void register(@RequestBody @Valid SignUpRequest signUpRequest) {
         userService.signUp(signUpRequest);
@@ -32,11 +35,13 @@ public class UserController {
         return userService.login(loginRequest);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping("/password")
     public void password(@RequestBody @Valid UpdatePasswordRequest updatePasswordRequest) {
         userService.updatePassword(updatePasswordRequest);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping("/place")
     public void place(@RequestBody @Valid UpdatePlaceRequest updatePlaceRequest) {
         userService.updatePlace(updatePlaceRequest);
