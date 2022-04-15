@@ -18,15 +18,15 @@ import org.springframework.data.redis.core.index.Indexed;
 public class RefreshToken {
 
     @Id
-    private String user_id;
+    private String accountId;
 
     @Indexed
-    private String token;
+    private String refreshToken;
 
     @TimeToLive
     private Long ttl;
 
-    public void updateToken(String token) {
-        this.token = token;
+    public void updateToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

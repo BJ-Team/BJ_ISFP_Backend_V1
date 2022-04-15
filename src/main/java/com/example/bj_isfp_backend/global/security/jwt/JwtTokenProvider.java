@@ -46,8 +46,8 @@ public class JwtTokenProvider {
 
         refreshTokenRepository.save(
                 RefreshToken.builder()
-                        .user_id(accountId)
-                        .token(refresh)
+                        .accountId(accountId)
+                        .refreshToken(refresh)
                         .ttl(jwtProperties.getRefreshExp())
                         .build());
         return refresh;
@@ -80,7 +80,7 @@ public class JwtTokenProvider {
         return LocalDateTime.now().plusSeconds(jwtProperties.getAccessExp());
     }
 
-    private Claims getBody(String token) {
+    public Claims getBody(String token) {
         try {
             return Jwts.parser()
                     .setSigningKey(jwtProperties.getSecretKey())
