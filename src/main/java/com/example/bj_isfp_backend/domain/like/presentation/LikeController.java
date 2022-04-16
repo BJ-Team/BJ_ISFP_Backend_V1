@@ -21,4 +21,10 @@ public class LikeController {
     public void wishPost(@PathVariable(name = "post-id") Long postId) {
         postLikeService.postLike(postId);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PostMapping("/wish/cancel/{post-id}")
+    public void wishCancel(@PathVariable(name = "post-id") Long postId) {
+        postLikeService.postLikeCancel(postId);
+    }
 }
