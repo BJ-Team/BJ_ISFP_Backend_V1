@@ -1,6 +1,7 @@
 package com.example.bj_isfp_backend.domain.like.domain;
 
 import com.example.bj_isfp_backend.domain.post.domain.Post;
+import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -25,11 +26,16 @@ public class Like extends BaseTimeEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
 
     @Builder
-    public Like(Post post) {
+    public Like(User user, Post post) {
+        this.user = user;
         this.post = post;
     }
 }
