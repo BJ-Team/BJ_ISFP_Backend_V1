@@ -20,8 +20,8 @@ public class UserFacade {
     }
 
     public void nameAlreadyExists(String name) {
-        userRepository.findByName(name)
-                .orElseThrow(() -> NameAlreadyExistsException.EXCEPTION);
+        if (userRepository.findByName(name).isPresent())
+            throw NameAlreadyExistsException.EXCEPTION;
     }
 
     public User getByAccountId(String accountId) {
