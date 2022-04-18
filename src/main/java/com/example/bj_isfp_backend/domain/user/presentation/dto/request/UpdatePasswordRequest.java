@@ -1,4 +1,4 @@
-package com.example.bj_isfp_backend.domain.user.presentation.dto;
+package com.example.bj_isfp_backend.domain.user.presentation.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
