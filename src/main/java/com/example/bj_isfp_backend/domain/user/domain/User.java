@@ -39,16 +39,21 @@ public class User extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
+    private String nowMyLocation;
+
+    private String userProfile;
+
     @Column(name = "device_token")
     private String deviceToken;
 
     @Builder
-    public User(String accountId, String password, String name, String place, Sex sex) {
+    public User(String accountId, String password, String name, String place, Sex sex, String nowMyLocation) {
         this.accountId = accountId;
         this.password = password;
         this.name = name;
         this.place = place;
         if (sex != null) this.sex = sex;
+        this.nowMyLocation = nowMyLocation;
     }
 
     public void setDeviceToken(String deviceToken) {
