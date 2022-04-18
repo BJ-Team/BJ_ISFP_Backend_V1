@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class ProfileServiceImpl implements ProfileService {
+public class MyProfileServiceImpl implements MyProfileService {
 
     private final UserFacade userFacade;
 
