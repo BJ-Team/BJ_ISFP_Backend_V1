@@ -42,16 +42,19 @@ public class Post extends BaseTimeEntity {
     @Column(nullable = false)
     private Integer price;
 
+    private String postImage;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Builder
-    public Post(String title, String content, Category category, Integer price, User user) {
+    public Post(String title, String content, Category category, Integer price, String postImage, User user) {
         this.title = title;
         this.content = content;
         this.category = category;
         this.price = price;
         this.user = user;
+        if (postImage != null) this.postImage = postImage;
     }
 }

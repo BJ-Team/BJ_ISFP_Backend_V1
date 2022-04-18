@@ -1,4 +1,4 @@
-package com.example.bj_isfp_backend.domain.post.presentation.dto;
+package com.example.bj_isfp_backend.domain.post.presentation.dto.request;
 
 import com.example.bj_isfp_backend.domain.post.domain.type.Category;
 import lombok.Getter;
