@@ -2,9 +2,14 @@ package com.example.bj_isfp_backend.domain.user.domain.repository;
 
 import com.example.bj_isfp_backend.domain.user.domain.repository.vo.QUserVO;
 import com.example.bj_isfp_backend.domain.user.domain.repository.vo.UserVO;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QQuerySoldResponse_SoldResponse;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QuerySoldResponse.SoldResponse;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
+import static com.example.bj_isfp_backend.domain.post.domain.QPost.post;
 import static com.example.bj_isfp_backend.domain.user.domain.QUser.user;
 
 @RequiredArgsConstructor
@@ -23,5 +28,18 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
                 ))
                 .from(user)
                 .fetchOne();
+    }
+
+    @Override
+    public List<SoldResponse> queryMyPageSoldList() {
+
+        return jpaQueryFactory
+                .select(new QQuerySoldResponse_SoldResponse(
+                        post.title,
+                        post.user.nowMyLocation
+                ))
+                .from(post)
+                .join(post.user, user)
+                .fetch();
     }
 }
