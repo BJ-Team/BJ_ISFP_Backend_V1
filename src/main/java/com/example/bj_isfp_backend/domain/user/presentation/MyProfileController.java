@@ -1,6 +1,7 @@
 package com.example.bj_isfp_backend.domain.user.presentation;
 
-import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMyInformationResponse;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMyInfoResponse;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QuerySoldResponse;
 import com.example.bj_isfp_backend.domain.user.service.MyProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,12 @@ public class MyProfileController {
     private final MyProfileService profileService;
 
     @GetMapping
-    public QueryMyInformationResponse queryMyInfo() {
+    public QueryMyInfoResponse queryMyInfo() {
         return profileService.queryMyPage();
+    }
+
+    @GetMapping("/sold")
+    public QuerySoldResponse querySold() {
+        return profileService.querySold();
     }
 }
