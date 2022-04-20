@@ -29,9 +29,8 @@ public class BuyServiceImpl implements BuyService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
-        if (!post.isSold()) {
+        if (post.isSold())
             throw AlreadySoldException.EXCEPTION;
-        }
 
         post.sold();
 
