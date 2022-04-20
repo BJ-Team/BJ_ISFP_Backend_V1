@@ -1,6 +1,7 @@
 package com.example.bj_isfp_backend.domain.user.presentation;
 
 import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMyInfoResponse;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMyLikeResponse;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMySoldResponse;
 import com.example.bj_isfp_backend.domain.user.service.MyProfileService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,12 @@ public class MyProfileController {
     }
 
     @GetMapping("/sold")
-    public QueryMySoldResponse querySold() {
+    public QueryMySoldResponse queryMySold() {
         return profileService.queryMySold();
+    }
+
+    @GetMapping("/like")
+    public QueryMyLikeResponse queryMyLike() {
+        return profileService.queryMyLike();
     }
 }
