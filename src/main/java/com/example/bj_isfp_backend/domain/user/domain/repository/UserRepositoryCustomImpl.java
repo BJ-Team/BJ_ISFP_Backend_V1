@@ -1,5 +1,7 @@
 package com.example.bj_isfp_backend.domain.user.domain.repository;
 
+import com.example.bj_isfp_backend.domain.user.domain.repository.vo.LikeVO;
+import com.example.bj_isfp_backend.domain.user.domain.repository.vo.QLikeVO;
 import com.example.bj_isfp_backend.domain.user.domain.repository.vo.QSoldVO;
 import com.example.bj_isfp_backend.domain.user.domain.repository.vo.QUserVO;
 import com.example.bj_isfp_backend.domain.user.domain.repository.vo.SoldVO;
@@ -36,6 +38,20 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
                 .select(new QSoldVO(
                         post.title,
                         user.nowMyLocation
+                ))
+                .from(post)
+                .join(post.user, user)
+                .fetch();
+    }
+
+    @Override
+    public List<LikeVO> queryMyPageLikeList() {
+        return jpaQueryFactory
+                .select(new QLikeVO(
+                        post.title,
+                        user.nowMyLocation,
+                        post.price,
+                        post.postImage
                 ))
                 .from(post)
                 .join(post.user, user)
