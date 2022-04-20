@@ -30,17 +30,17 @@ public class ReportServiceImpl implements ReportService {
         Post post = postRepository.findById(createReportRequest.getPostId())
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
-        try {
-            reportRepository.save(
-                    Report.builder()
-                            .title(createReportRequest.getTitle())
-                            .content(createReportRequest.getTitle())
-                            .user(user)
-                            .post(post)
-                            .build()
-            );
-        } catch (RuntimeException e) {
+        if (post.isReported())
             throw AlreadyReportedPostException.EXCEPTION;
-        }
+
+        post.reported();
+
+        reportRepository.save(
+                Report.builder()
+                        .title(createReportRequest.getTitle())
+                        .content(createReportRequest.getTitle())
+                        .user(user)
+                        .post(post)
+                        .build());
     }
 }
