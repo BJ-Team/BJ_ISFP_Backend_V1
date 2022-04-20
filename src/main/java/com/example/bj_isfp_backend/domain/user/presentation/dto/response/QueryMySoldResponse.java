@@ -1,26 +1,22 @@
 package com.example.bj_isfp_backend.domain.user.presentation.dto.response;
 
 import com.querydsl.core.annotations.QueryProjection;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
 
 @Getter
-@Builder
-public class QuerySoldResponse {
+@AllArgsConstructor
+public class QueryMySoldResponse {
 
-    private final List<SoldResponse> soldResponseList;
+    private final List<MySold> mySoldList;
 
     @Getter
-    public static class SoldResponse {
+    @Builder
+    public static class MySold {
         private final String title;
         private final String location;
-
-        @QueryProjection
-        public SoldResponse(String title, String location) {
-            this.title = title;
-            this.location = location;
-        }
     }
 }
