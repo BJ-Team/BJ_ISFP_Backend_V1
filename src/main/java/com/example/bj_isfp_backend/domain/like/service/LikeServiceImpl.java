@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class PostLikeServiceImpl implements PostLikeService {
+public class LikeServiceImpl implements LikeService {
 
     private final PostRepository postRepository;
     private final LikeRepository likeRepository;

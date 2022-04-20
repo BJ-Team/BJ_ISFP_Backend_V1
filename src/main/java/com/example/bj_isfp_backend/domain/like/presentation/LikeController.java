@@ -1,6 +1,6 @@
 package com.example.bj_isfp_backend.domain.like.presentation;
 
-import com.example.bj_isfp_backend.domain.like.service.PostLikeService;
+import com.example.bj_isfp_backend.domain.like.service.LikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/post")
 public class LikeController {
 
-    private final PostLikeService postLikeService;
+    private final LikeService postLikeService;
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping("/wish/{post-id}")
