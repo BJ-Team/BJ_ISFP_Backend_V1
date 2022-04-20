@@ -1,9 +1,10 @@
-package com.example.bj_isfp_backend.domain.buy.service;
+package com.example.bj_isfp_backend.domain.post.service;
 
-import com.example.bj_isfp_backend.domain.buy.domain.Buy;
-import com.example.bj_isfp_backend.domain.buy.domain.repository.BuyRepository;
+import com.example.bj_isfp_backend.domain.post.domain.Buy;
 import com.example.bj_isfp_backend.domain.post.domain.Post;
+import com.example.bj_isfp_backend.domain.post.domain.repository.BuyRepository;
 import com.example.bj_isfp_backend.domain.post.domain.repository.PostRepository;
+import com.example.bj_isfp_backend.domain.post.exception.AlreadySoldException;
 import com.example.bj_isfp_backend.domain.post.exception.PostNotFoundException;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
@@ -28,10 +29,15 @@ public class BuyServiceImpl implements BuyService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
-        buyRepository.save(
-                Buy.builder()
-                        .user(user)
-                        .post(post)
-                        .build());
+        if (!post.isSold()) {
+            buyRepository.save(
+                    Buy.builder()
+                            .user(user)
+                            .post(post)
+                            .build());
+            post.sold();
+        } else {
+            throw AlreadySoldException.EXCEPTION;
+        }
     }
 }

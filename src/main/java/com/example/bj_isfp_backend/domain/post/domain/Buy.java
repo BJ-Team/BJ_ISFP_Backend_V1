@@ -1,4 +1,4 @@
-package com.example.bj_isfp_backend.domain.buy.domain;
+package com.example.bj_isfp_backend.domain.post.domain;
 
 import com.example.bj_isfp_backend.domain.post.domain.Post;
 import com.example.bj_isfp_backend.domain.user.domain.User;
@@ -32,6 +32,7 @@ public class Buy extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
 
     @Builder
     public Buy(User user, Post post) {
