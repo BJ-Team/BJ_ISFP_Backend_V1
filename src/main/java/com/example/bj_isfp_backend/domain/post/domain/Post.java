@@ -47,6 +47,9 @@ public class Post extends BaseTimeEntity {
     @Column(columnDefinition = "false")
     private boolean isSold;
 
+    @Column(columnDefinition = "false")
+    private boolean isReported;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -63,5 +66,9 @@ public class Post extends BaseTimeEntity {
 
     public void sold() {
         this.isSold = true;
+    }
+
+    public void reported() {
+        this.isReported = true;
     }
 }
