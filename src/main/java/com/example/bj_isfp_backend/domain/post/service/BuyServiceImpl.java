@@ -30,14 +30,15 @@ public class BuyServiceImpl implements BuyService {
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
         if (!post.isSold()) {
-            buyRepository.save(
-                    Buy.builder()
-                            .user(user)
-                            .post(post)
-                            .build());
-            post.sold();
-        } else {
             throw AlreadySoldException.EXCEPTION;
         }
+
+        post.sold();
+
+        buyRepository.save(
+                Buy.builder()
+                        .user(user)
+                        .post(post)
+                        .build());
     }
 }
