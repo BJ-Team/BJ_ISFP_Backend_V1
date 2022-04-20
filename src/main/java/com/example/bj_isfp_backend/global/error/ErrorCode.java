@@ -19,6 +19,7 @@ public enum ErrorCode {
 
     POST_NOT_FOUND(404, "POST-404-1", "Post Not Found"),
     ALREADY_REPORTED_POST(409, "POST-409-1", "Already Reported Post"),
+    ALREADY_SOLD(409, "POST-409-2", "Already Sold"),
 
     LIKE_NOT_FOUND(404, "LIKE-404-1", "Like Not Found"),
 
