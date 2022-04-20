@@ -31,7 +31,7 @@ public class ReportServiceImpl implements ReportService {
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
         try {
-            Report report = reportRepository.save(
+            reportRepository.save(
                     Report.builder()
                             .title(createReportRequest.getTitle())
                             .content(createReportRequest.getTitle())
