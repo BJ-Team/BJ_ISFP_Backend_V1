@@ -1,4 +1,4 @@
-package com.example.bj_isfp_backend.domain.buy.service;
+package com.example.bj_isfp_backend.domain.post.service;
 
 public interface BuyService {
 
