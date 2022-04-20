@@ -1,9 +1,9 @@
 package com.example.bj_isfp_backend.domain.user.domain.repository;
 
+import com.example.bj_isfp_backend.domain.user.domain.repository.vo.QSoldVO;
 import com.example.bj_isfp_backend.domain.user.domain.repository.vo.QUserVO;
+import com.example.bj_isfp_backend.domain.user.domain.repository.vo.SoldVO;
 import com.example.bj_isfp_backend.domain.user.domain.repository.vo.UserVO;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QQuerySoldResponse_SoldResponse;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QuerySoldResponse.SoldResponse;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -31,12 +31,11 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
     }
 
     @Override
-    public List<SoldResponse> queryMyPageSoldList() {
-
+    public List<SoldVO> queryMyPageSoldList() {
         return jpaQueryFactory
-                .select(new QQuerySoldResponse_SoldResponse(
+                .select(new QSoldVO(
                         post.title,
-                        post.user.nowMyLocation
+                        user.nowMyLocation
                 ))
                 .from(post)
                 .join(post.user, user)

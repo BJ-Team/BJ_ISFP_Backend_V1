@@ -2,15 +2,16 @@ package com.example.bj_isfp_backend.domain.user.service;
 
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.domain.repository.UserRepository;
+import com.example.bj_isfp_backend.domain.user.domain.repository.vo.SoldVO;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMyInfoResponse;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QuerySoldResponse;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QuerySoldResponse.SoldResponse;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMySoldResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -33,12 +34,19 @@ public class MyProfileServiceImpl implements MyProfileService {
     }
 
     @Override
-    public QuerySoldResponse querySold() {
+    public QueryMySoldResponse queryMySold() {
 
-        List<SoldResponse> soldResponseList = userRepository.queryMyPageSoldList();
+        User user = userFacade.getCurrentUser();
 
-        return QuerySoldResponse.builder()
-                .soldResponseList(soldResponseList)
-                .build();
+        List<SoldVO> soldResponseList = userRepository.queryMyPageSoldList();
+
+        return new QueryMySoldResponse(soldResponseList
+                .stream()
+                .map(soldVO ->
+                        QueryMySoldResponse.MySold.builder()
+                                .title(soldVO.getTitle())
+                                .location(user.getNowMyLocation())
+                                .build())
+                .collect(Collectors.toList()));
     }
 }
