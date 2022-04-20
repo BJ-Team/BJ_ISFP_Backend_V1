@@ -44,6 +44,9 @@ public class Post extends BaseTimeEntity {
 
     private String postImage;
 
+    @Column(columnDefinition = "false")
+    private boolean isSold;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -56,5 +59,9 @@ public class Post extends BaseTimeEntity {
         this.price = price;
         this.user = user;
         if (postImage != null) this.postImage = postImage;
+    }
+
+    public void sold() {
+        this.isSold = true;
     }
 }
