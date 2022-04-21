@@ -7,8 +7,8 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @NoArgsConstructor
-public class UpdatePlaceRequest {
+public class UpdateLocationRequest {
 
-    @NotBlank(message = "place는 필수 입력입니다.")
-    private String place;
+    @NotBlank(message = "location는 필수 입력입니다.")
+    private String location;
 }
