@@ -15,7 +15,7 @@ spring:
     property-naming-strategy: SNAKE_CASE
 
   redis:
-    post: ${REDIS_PORT}
+    port: ${REDIS_PORT}
     host: ${REDIS_HOST}
 
 jwt:
