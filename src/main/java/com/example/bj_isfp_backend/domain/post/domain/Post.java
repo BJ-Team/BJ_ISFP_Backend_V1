@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,14 +45,14 @@ public class Post extends BaseTimeEntity {
 
     private String postImage;
 
-    @Column(columnDefinition = "false")
+    @ColumnDefault("false")
     private boolean isSold;
 
-    @Column(columnDefinition = "false")
+    @ColumnDefault("false")
     private boolean isReported;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Builder
