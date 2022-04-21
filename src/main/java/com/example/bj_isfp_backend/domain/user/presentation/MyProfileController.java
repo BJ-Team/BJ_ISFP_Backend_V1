@@ -1,8 +1,7 @@
 package com.example.bj_isfp_backend.domain.user.presentation;
 
 import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMyInfoResponse;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMyLikeResponse;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMySoldResponse;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMyPostResponse;
 import com.example.bj_isfp_backend.domain.user.service.MyProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,16 +17,21 @@ public class MyProfileController {
 
     @GetMapping
     public QueryMyInfoResponse queryMyInfo() {
-        return profileService.queryMyPage();
+        return profileService.queryMyPageInfo();
     }
 
     @GetMapping("/sold")
-    public QueryMySoldResponse queryMySold() {
-        return profileService.queryMySold();
+    public QueryMyPostResponse queryMySold() {
+        return profileService.queryMyPageSold();
     }
 
     @GetMapping("/like")
-    public QueryMyLikeResponse queryMyLike() {
-        return profileService.queryMyLike();
+    public QueryMyPostResponse queryMyLiked() {
+        return profileService.queryMyPageBought();
+    }
+
+    @GetMapping("/bought")
+    public QueryMyPostResponse queryMyBought() {
+        return profileService.queryMyPageBought();
     }
 }
