@@ -22,8 +22,8 @@ public class SignUpRequest {
     @NotBlank(message = "name은 필수 입력입니다.")
     private String name;
 
-    @NotBlank(message = "place는 필수 입력입니다.")
-    private String place;
+    @NotBlank(message = "location은 필수 입력입니다.")
+    private String location;
 
     private Sex sex;
 }

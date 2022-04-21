@@ -4,8 +4,8 @@ import com.example.bj_isfp_backend.domain.auth.presentation.dto.TokenResponse;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.request.DuplicateNameCheckRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.request.LoginRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.request.SignUpRequest;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.request.UpdateLocationRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.request.UpdatePasswordRequest;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.request.UpdatePlaceRequest;
 import com.example.bj_isfp_backend.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -43,8 +43,8 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping("/place")
-    public void place(@RequestBody @Valid UpdatePlaceRequest updatePlaceRequest) {
-        userService.updatePlace(updatePlaceRequest);
+    public void place(@RequestBody @Valid UpdateLocationRequest updateLocationRequest) {
+        userService.updateLocation(updateLocationRequest);
     }
 
     @PostMapping("/name")

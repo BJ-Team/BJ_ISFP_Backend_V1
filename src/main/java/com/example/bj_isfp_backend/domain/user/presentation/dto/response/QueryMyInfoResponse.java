@@ -7,6 +7,6 @@ import lombok.Getter;
 @Builder
 public class QueryMyInfoResponse {
     private String name;
-    private String nowMyLocation;
+    private String location;
     private String UserProfile;
 }

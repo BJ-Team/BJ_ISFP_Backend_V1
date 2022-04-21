@@ -9,8 +9,8 @@ import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.request.DuplicateNameCheckRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.request.LoginRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.request.SignUpRequest;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.request.UpdateLocationRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.request.UpdatePasswordRequest;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.request.UpdatePlaceRequest;
 import com.example.bj_isfp_backend.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
                         .accountId(signUpRequest.getAccountId())
                         .password(passwordEncoder.encode(signUpRequest.getPassword()))
                         .name(signUpRequest.getName())
-                        .place(signUpRequest.getPlace())
+                        .location(signUpRequest.getLocation())
                         .sex(signUpRequest.getSex())
                         .build());
     }
@@ -77,11 +77,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updatePlace(UpdatePlaceRequest updatePlaceRequest) {
+    public void updateLocation(UpdateLocationRequest updateLocationRequest) {
 
         User user = userFacade.getCurrentUser();
 
-        user.updatePlace(updatePlaceRequest.getPlace());
+        user.updateLocation(updateLocationRequest.getLocation());
     }
 
     @Override
