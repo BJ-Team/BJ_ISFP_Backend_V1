@@ -34,12 +34,10 @@ public class User extends BaseTimeEntity {
     private String name;
 
     @Column(nullable = false)
-    private String place;
+    private String location;
 
     @Enumerated(EnumType.STRING)
     private Sex sex;
-
-    private String nowMyLocation;
 
     private String userProfile;
 
@@ -47,13 +45,12 @@ public class User extends BaseTimeEntity {
     private String deviceToken;
 
     @Builder
-    public User(String accountId, String password, String name, String place, Sex sex, String nowMyLocation) {
+    public User(String accountId, String password, String name, String location, Sex sex) {
         this.accountId = accountId;
         this.password = password;
         this.name = name;
-        this.place = place;
+        this.location = location;
         if (sex != null) this.sex = sex;
-        this.nowMyLocation = nowMyLocation;
     }
 
     public void setDeviceToken(String deviceToken) {
@@ -64,7 +61,7 @@ public class User extends BaseTimeEntity {
         this.password = password;
     }
 
-    public void updatePlace(String place) {
-        this.place = place;
+    public void updateLocation(String location) {
+        this.location = location;
     }
 }

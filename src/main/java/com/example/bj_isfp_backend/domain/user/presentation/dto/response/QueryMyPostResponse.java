@@ -7,14 +7,14 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-@AllArgsConstructor
-public class QueryMyLikeResponse {
+@Builder
+public class QueryMyPostResponse {
 
-    private final List<MyLike> myLikeList;
+    private final List<MyPost> myPostList;
 
     @Getter
     @Builder
-    public static class MyLike {
+    public static class MyPost {
         private final String title;
         private final String location;
         private final Integer price;

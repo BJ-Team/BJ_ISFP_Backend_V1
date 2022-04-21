@@ -5,7 +5,7 @@ import com.example.bj_isfp_backend.domain.user.presentation.dto.request.Duplicat
 import com.example.bj_isfp_backend.domain.user.presentation.dto.request.LoginRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.request.SignUpRequest;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.request.UpdatePasswordRequest;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.request.UpdatePlaceRequest;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.request.UpdateLocationRequest;
 
 public interface UserService {
 
@@ -15,7 +15,7 @@ public interface UserService {
 
     void updatePassword(UpdatePasswordRequest changePasswordRequest);
 
-    void updatePlace(UpdatePlaceRequest updatePlaceRequest);
+    void updateLocation(UpdateLocationRequest updateLocationRequest);
 
     void duplicateNameCheck(DuplicateNameCheckRequest duplicateNameCheckRequest);
 }
