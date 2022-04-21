@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity
+@Entity(name = "likes")
 public class Like extends BaseTimeEntity {
 
     @Id
