@@ -1,6 +1,5 @@
 package com.example.bj_isfp_backend.domain.user.presentation.dto.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 

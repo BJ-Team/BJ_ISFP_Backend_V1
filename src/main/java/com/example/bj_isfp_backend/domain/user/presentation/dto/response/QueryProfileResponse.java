@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class QueryMyInfoResponse {
+public class QueryProfileResponse {
 
+    private final Long userId;
     private final String name;
-    private final String location;
     private final String UserProfile;
 }

@@ -37,7 +37,6 @@ public class MyProfileServiceImpl implements MyProfileService {
                 .build();
     }
 
-
     @Override
     @Transactional(readOnly = true)
     public QueryMyPostResponse queryMyPageSold() {
