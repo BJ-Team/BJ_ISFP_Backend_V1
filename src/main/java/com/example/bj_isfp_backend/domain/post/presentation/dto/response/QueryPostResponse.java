@@ -11,7 +11,6 @@ import java.util.List;
 @Builder
 public class QueryPostResponse {
 
-    private final String nowMyLocation;
     private final List<PostResponse> postResponse;
 
     @Getter
