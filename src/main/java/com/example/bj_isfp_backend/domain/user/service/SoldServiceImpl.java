@@ -3,7 +3,6 @@ package com.example.bj_isfp_backend.domain.user.service;
 import com.example.bj_isfp_backend.domain.post.domain.repository.PostRepository;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryProfileResponse;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryUserPostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,22 +13,18 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class ProfileServiceImpl implements ProfileService {
+public class SoldServiceImpl implements SoldService {
 
     private final UserFacade userFacade;
     private final PostRepository postRepository;
 
     @Override
     @Transactional(readOnly = true)
-    public QueryProfileResponse queryProfile(Long userId) {
+    public QueryUserPostResponse queryMyPageSold() {
 
-        User user = userFacade.getUserByUserId(userId);
+        User user = userFacade.getCurrentUser();
 
-        return QueryProfileResponse.builder()
-                .userId(user.getId())
-                .name(user.getName())
-                .UserProfile(user.getUserProfile())
-                .build();
+        return querySoldList(user);
     }
 
     @Override
@@ -37,6 +32,11 @@ public class ProfileServiceImpl implements ProfileService {
     public QueryUserPostResponse queryUserSold(Long userId) {
 
         User user = userFacade.getUserByUserId(userId);
+
+        return querySoldList(user);
+    }
+
+    private QueryUserPostResponse querySoldList(User user) {
 
         List<QueryUserPostResponse.UserPost> userPostList = postRepository.findByUser(user)
                 .stream()
