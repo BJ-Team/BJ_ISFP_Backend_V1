@@ -61,7 +61,6 @@ public class PostServiceImpl implements PostService {
         List<PostResponse> postList = postRepository.queryPostList();
 
         return QueryPostResponse.builder()
-                .nowMyLocation(null)
                 .postResponse(postList)
                 .build();
     }
