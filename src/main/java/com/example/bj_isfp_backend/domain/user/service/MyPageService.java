@@ -2,25 +2,25 @@ package com.example.bj_isfp_backend.domain.user.service;
 
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryProfileResponse;
+import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryMyInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class ProfileService {
+public class MyPageService {
 
     private final UserFacade userFacade;
 
     @Transactional(readOnly = true)
-    public QueryProfileResponse queryProfile(Long userId) {
+    public QueryMyInfoResponse queryMyPageInfo() {
 
-        User user = userFacade.getUserByUserId(userId);
+        User user = userFacade.getCurrentUser();
 
-        return QueryProfileResponse.builder()
-                .userId(user.getId())
+        return QueryMyInfoResponse.builder()
                 .name(user.getName())
+                .location(user.getLocation())
                 .UserProfile(user.getUserProfile())
                 .build();
     }

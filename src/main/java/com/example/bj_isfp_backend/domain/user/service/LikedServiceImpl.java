@@ -1,9 +1,8 @@
 package com.example.bj_isfp_backend.domain.user.service;
 
-import com.example.bj_isfp_backend.domain.post.domain.repository.PostRepository;
+import com.example.bj_isfp_backend.domain.like.domain.repository.LikeRepository;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
-import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryProfileResponse;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryUserPostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,40 +13,41 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class ProfileServiceImpl implements ProfileService {
+public class LikedServiceImpl implements LikedService {
 
     private final UserFacade userFacade;
-    private final PostRepository postRepository;
+    private final LikeRepository likeRepository;
 
     @Override
     @Transactional(readOnly = true)
-    public QueryProfileResponse queryProfile(Long userId) {
+    public QueryUserPostResponse queryMyPageLiked() {
 
-        User user = userFacade.getUserByUserId(userId);
+        User user = userFacade.getCurrentUser();
 
-        return QueryProfileResponse.builder()
-                .userId(user.getId())
-                .name(user.getName())
-                .UserProfile(user.getUserProfile())
-                .build();
+        return queryLikedList(user);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public QueryUserPostResponse queryUserSold(Long userId) {
+    public QueryUserPostResponse queryUserLiked(Long userId) {
 
         User user = userFacade.getUserByUserId(userId);
 
-        List<QueryUserPostResponse.UserPost> userPostList = postRepository.findByUser(user)
+        return queryLikedList(user);
+    }
+
+    private QueryUserPostResponse queryLikedList(User user) {
+
+        List<QueryUserPostResponse.UserPost> userPostList = likeRepository.findByUser(user)
                 .stream()
-                .map(post -> QueryUserPostResponse.UserPost.builder()
+                .map(like -> QueryUserPostResponse.UserPost.builder()
                         .userId(user.getId())
-                        .postId(post.getId())
-                        .title(post.getTitle())
+                        .postId(like.getPost().getId())
+                        .title(like.getPost().getTitle())
                         .location(user.getLocation())
-                        .createTime(post.getCreateTime())
-                        .price(post.getPrice())
-                        .postImage(post.getPostImage())
+                        .createTime(like.getPost().getCreateTime())
+                        .price(like.getPost().getPrice())
+                        .postImage(like.getPost().getPostImage())
                         .build())
                 .collect(Collectors.toList());
 
