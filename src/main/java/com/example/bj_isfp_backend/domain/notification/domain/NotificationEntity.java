@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Notification {
+public class NotificationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +43,7 @@ public class Notification {
     private User user;
 
     @Builder
-    public Notification(String title, String content, String data, User user) {
+    public NotificationEntity(String title, String content, String data, User user) {
         this.title = title;
         this.content = content;
         this.data = data;
