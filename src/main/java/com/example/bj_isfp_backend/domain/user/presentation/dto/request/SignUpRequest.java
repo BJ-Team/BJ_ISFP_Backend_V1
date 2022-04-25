@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Getter
 @NoArgsConstructor
@@ -19,6 +20,7 @@ public class SignUpRequest {
             message = "비밀번호는 영문자와 숫자, 특수문자를 모두 포함해서 8~16자리 이내로 입력해주세요.")
     private String password;
 
+    @Size(max = 20, message = "name은 20자 이내로 입력해주세요.")
     @NotBlank(message = "name은 필수 입력입니다.")
     private String name;
 
