@@ -19,8 +19,8 @@ public class ReportController {
 
     private final ReportService reportService;
 
-    @PostMapping("/post")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PostMapping("/post")
     public void reportPost(@RequestBody @Valid CreateReportRequest createReportRequest) {
         reportService.reportPost(createReportRequest);
     }
