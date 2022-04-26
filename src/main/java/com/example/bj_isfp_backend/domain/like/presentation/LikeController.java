@@ -3,6 +3,7 @@ package com.example.bj_isfp_backend.domain.like.presentation;
 import com.example.bj_isfp_backend.domain.like.service.LikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ public class LikeController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PostMapping("/wish/cancel/{post-id}")
+    @DeleteMapping("/wish/cancel/{post-id}")
     public void wishCancel(@PathVariable(name = "post-id") Long postId) {
         postLikeService.postLikeCancel(postId);
     }
