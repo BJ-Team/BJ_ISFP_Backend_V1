@@ -11,6 +11,7 @@ public enum ErrorCode {
 
     BAD_REQUEST(400, "CLIENT-400-1", "Bad Request"),
 
+    UPLOAD_FILE_FAILED(400, "AUTH-400-1", "Upload File Failed"),
     PASSWORD_NOT_CORRECT(409, "AUTH-409-1", "Password Not Correct"),
 
     USER_NOT_FOUND(404, "USER-404-1", "User Not Found"),
