@@ -19,11 +19,20 @@ spring:
     host: ${REDIS_HOST}
 
 jwt:
-  secretKey: ${JWT_SECRET}
-  accessExp: ${JWT_ACCESS_EXP}
-  refreshExp: ${JWT_REFRESH_EXP}
+  secret-key: ${JWT_SECRET}
+  access-kxp: ${JWT_ACCESS_EXP}
+  refresh-exp: ${JWT_REFRESH_EXP}
   header: ${JWT_HEADER}
   prefix: ${JWT_PREFIX}
 
 firebase:
   path: ${FCM_PATH}
+
+aws:
+  s3:
+    access-key: ${IAM_ACCESS_KEY}
+    secret-key: ${IAM_SECRET_KEY}
+    bucket: ${BUCKET}
+    static: ${IAM_REGION}
+  stack:
+    auto: false
