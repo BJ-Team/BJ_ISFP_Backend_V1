@@ -4,7 +4,7 @@ import com.example.bj_isfp_backend.global.error.BjISFPException;
 import com.example.bj_isfp_backend.global.error.ErrorCode;
 
 public class AlreadySoldException extends BjISFPException {
-    public static AlreadySoldException EXCEPTION =
+    public static final AlreadySoldException EXCEPTION =
             new AlreadySoldException();
 
     private AlreadySoldException() {

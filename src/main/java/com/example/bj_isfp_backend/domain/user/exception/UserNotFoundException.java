@@ -4,7 +4,7 @@ import com.example.bj_isfp_backend.global.error.BjISFPException;
 import com.example.bj_isfp_backend.global.error.ErrorCode;
 
 public class UserNotFoundException extends BjISFPException {
-    public static UserNotFoundException EXCEPTION =
+    public static final UserNotFoundException EXCEPTION =
             new UserNotFoundException();
 
     private UserNotFoundException() {
