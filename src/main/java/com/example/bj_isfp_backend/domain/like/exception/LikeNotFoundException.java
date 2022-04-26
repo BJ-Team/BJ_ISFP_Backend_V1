@@ -4,7 +4,7 @@ import com.example.bj_isfp_backend.global.error.BjISFPException;
 import com.example.bj_isfp_backend.global.error.ErrorCode;
 
 public class LikeNotFoundException extends BjISFPException {
-    public static LikeNotFoundException EXCEPTION =
+    public static final LikeNotFoundException EXCEPTION =
             new LikeNotFoundException();
 
     private LikeNotFoundException() {

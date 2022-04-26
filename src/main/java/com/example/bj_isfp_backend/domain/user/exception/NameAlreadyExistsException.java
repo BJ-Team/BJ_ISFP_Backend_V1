@@ -4,7 +4,7 @@ import com.example.bj_isfp_backend.global.error.BjISFPException;
 import com.example.bj_isfp_backend.global.error.ErrorCode;
 
 public class NameAlreadyExistsException extends BjISFPException {
-    public static NameAlreadyExistsException EXCEPTION =
+    public static final NameAlreadyExistsException EXCEPTION =
             new NameAlreadyExistsException();
 
     private NameAlreadyExistsException() {
