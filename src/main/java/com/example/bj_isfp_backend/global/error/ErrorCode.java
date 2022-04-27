@@ -24,6 +24,8 @@ public enum ErrorCode {
 
     LIKE_NOT_FOUND(404, "LIKE-404-1", "Like Not Found"),
 
+    NOTIFICATION_NOT_FOUND(404, "NOTIFICATION-404-1", "Notification Not Found"),
+
     EXPIRED_JWT(401, "JWT-401-1", "Expired Jwt"),
     INVALID_JWT(401, "JWT-401-2", "Invalid Jwt"),
     REFRESH_TOKEN_NOT_FOUND(404, "JWT-404-1", "RefreshToken Not Found");
