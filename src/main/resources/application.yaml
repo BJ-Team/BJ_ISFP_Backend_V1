@@ -36,3 +36,6 @@ aws:
     static: ${IAM_REGION}
   stack:
     auto: false
+
+socket:
+  port: ${SOCKET_PORT}
