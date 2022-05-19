@@ -38,4 +38,6 @@ aws:
     auto: false
 
 socket:
+  host: ${SOCKET_HOST}
   port: ${SOCKET_PORT}
+
