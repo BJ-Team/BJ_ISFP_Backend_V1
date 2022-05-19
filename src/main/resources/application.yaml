@@ -36,3 +36,17 @@ aws:
     static: ${IAM_REGION}
   stack:
     auto: false
+
+socket:
+  host: ${SOCKET_HOST}
+  port: ${SOCKET_PORT}
+<<<<<<< HEAD
+=======
+  boss-count: ${SOCKET_BOSS_COUNT}
+  work-count: ${SOCKET_WORK_COUNT}
+  allow-custom-requests: ${SOCKET_ALLOW_CUSTOM_REQUEST}
+  upgrade-timeout: ${SOCKET_UPGRADE_TIMEOUT}
+  ping-timeout: ${SOCKET_PING_TIMEOUT}
+  ping-interval: ${SOCKET_PING_INTERVAL}
+>>>>>>> 102-socket-setting
+
