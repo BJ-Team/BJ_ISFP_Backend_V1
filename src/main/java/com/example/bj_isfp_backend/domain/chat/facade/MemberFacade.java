@@ -18,4 +18,9 @@ public class MemberFacade {
         return memberRepository.findByUserAndRoom(user, room)
                 .orElseThrow(() -> MemberNotFoundException.EXCEPTION);
     }
+
+    public void isEmptyMessageByUserAndRoom(User user, Room room) {
+        if(memberRepository.findByUserAndRoom(user, room).isEmpty())
+            throw MemberNotFoundException.EXCEPTION;
+    }
 }
