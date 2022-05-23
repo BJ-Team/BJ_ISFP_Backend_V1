@@ -28,7 +28,11 @@ public enum ErrorCode {
 
     EXPIRED_JWT(401, "JWT-401-1", "Expired Jwt"),
     INVALID_JWT(401, "JWT-401-2", "Invalid Jwt"),
-    REFRESH_TOKEN_NOT_FOUND(404, "JWT-404-1", "RefreshToken Not Found");
+    REFRESH_TOKEN_NOT_FOUND(404, "JWT-404-1", "RefreshToken Not Found"),
+
+    ROOM_NOT_FOUND(404, "ROOM-404-1", "Room Not Found"),
+
+    MEMBER_NOT_FOUND(404, "MEMBER-404-1", "Member Not Found");
 
     private final int status;
     private final String code;
