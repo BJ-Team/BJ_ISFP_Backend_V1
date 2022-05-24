@@ -8,14 +8,12 @@ import com.example.bj_isfp_backend.domain.chat.service.ChatSocketService;
 import com.example.bj_isfp_backend.domain.chat.service.MessageService;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
+import com.example.bj_isfp_backend.global.socket.anotation.SocketController;
 import com.example.bj_isfp_backend.global.socket.anotation.SocketMapping;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+@SocketController
 @RequiredArgsConstructor
-@RestController
-@RequestMapping("/socket")
 public class ChatSocketController {
 
     private final MessageService messageService;

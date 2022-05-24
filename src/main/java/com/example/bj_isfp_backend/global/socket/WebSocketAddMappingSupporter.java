@@ -2,6 +2,7 @@ package com.example.bj_isfp_backend.global.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.example.bj_isfp_backend.global.socket.anotation.SocketController;
 import com.example.bj_isfp_backend.global.socket.anotation.SocketMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
