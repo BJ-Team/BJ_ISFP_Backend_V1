@@ -1,9 +1,11 @@
 package com.example.bj_isfp_backend.domain.user.facade;
 
+import com.corundumstudio.socketio.SocketIOClient;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.domain.repository.UserRepository;
 import com.example.bj_isfp_backend.domain.user.exception.NameAlreadyExistsException;
 import com.example.bj_isfp_backend.domain.user.exception.UserNotFoundException;
+import com.example.bj_isfp_backend.global.socket.properties.ClientProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,11 @@ public class UserFacade {
 
     public User getCurrentUser() {
         String accountId = SecurityContextHolder.getContext().getAuthentication().getName();
+        return getByAccountId(accountId);
+    }
+
+    public User getCurrentUser(SocketIOClient socketIOClient) {
+        String accountId = socketIOClient.get(ClientProperty.USER_KEY);
         return getByAccountId(accountId);
     }
 

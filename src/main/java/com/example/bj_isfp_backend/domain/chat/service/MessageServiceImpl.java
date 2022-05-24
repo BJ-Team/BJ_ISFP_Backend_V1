@@ -4,8 +4,9 @@ import com.example.bj_isfp_backend.domain.chat.domain.Member;
 import com.example.bj_isfp_backend.domain.chat.domain.Message;
 import com.example.bj_isfp_backend.domain.chat.domain.Room;
 import com.example.bj_isfp_backend.domain.chat.domain.repository.MessageRepository;
+import com.example.bj_isfp_backend.domain.chat.domain.repository.RoomRepository;
+import com.example.bj_isfp_backend.domain.chat.exception.RoomNotFoundException;
 import com.example.bj_isfp_backend.domain.chat.facade.MemberFacade;
-import com.example.bj_isfp_backend.domain.chat.facade.RoomFacade;
 import com.example.bj_isfp_backend.domain.chat.presentation.dto.request.ChatRequest;
 import com.example.bj_isfp_backend.domain.chat.presentation.dto.response.MessageListResponse;
 import com.example.bj_isfp_backend.domain.chat.presentation.dto.response.MessageListResponse.MessageResponse;
@@ -20,26 +21,29 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class ChatServiceImpl implements ChatService {
+public class MessageServiceImpl implements MessageService {
 
 
-    private final RoomFacade roomFacade;
+    private final RoomRepository roomRepository;
     private final MemberFacade memberFacade;
     private final UserFacade userFacade;
     private final MessageRepository messageRepository;
 
     @Override
     @Transactional
-    public void saveMessage(ChatRequest chatRequest, User user) {
+    public Message saveMessage(ChatRequest chatRequest, User user) {
 
-        Room room = roomFacade.getRoomId(chatRequest.getRoomId());
+        Room room = roomRepository.findById(chatRequest.getRoomId())
+                .orElseThrow(() -> RoomNotFoundException.EXCEPTION);
+
         Member member = memberFacade.getMemberByUserAndRoom(user, room);
 
-        messageRepository.save(
+        return messageRepository.save(
                 Message.builder()
                         .content(chatRequest.getMessage())
-                        .room(room)
+                        .createTime(room.getPost().getCreateTime())
                         .member(member)
+                        .room(room)
                         .build());
     }
 
@@ -47,8 +51,9 @@ public class ChatServiceImpl implements ChatService {
     @Transactional(readOnly = true)
     public MessageListResponse queryMessage(Long roomId) {
 
-        Room room = roomFacade.getRoomId(roomId);
         User user = userFacade.getCurrentUser();
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(() -> RoomNotFoundException.EXCEPTION);
 
         memberFacade.isEmptyMessageByUserAndRoom(user, room);
 
