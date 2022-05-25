@@ -6,6 +6,7 @@ import com.example.bj_isfp_backend.domain.chat.domain.Message;
 import com.example.bj_isfp_backend.domain.chat.presentation.dto.request.ChatRequest;
 import com.example.bj_isfp_backend.domain.chat.service.ChatSocketService;
 import com.example.bj_isfp_backend.domain.chat.service.MessageService;
+import com.example.bj_isfp_backend.domain.chat.service.RoomService;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
 import com.example.bj_isfp_backend.global.socket.anotation.SocketController;
@@ -18,7 +19,13 @@ public class ChatSocketController {
 
     private final MessageService messageService;
     private final ChatSocketService chatSocketService;
+    private final RoomService roomService;
     private final UserFacade userFacade;
+
+    @SocketMapping(endpoint = "join", requestCls = String.class)
+    public void joinRoom(SocketIOClient socketIOClient, SocketIOServer socketIOServer, Long postId) {
+        roomService.joinRoom(socketIOClient, socketIOServer, postId);
+    }
 
     @SocketMapping(endpoint = "message", requestCls = ChatRequest.class)
     public void sendMessage(SocketIOClient socketIOClient, SocketIOServer socketIOServer, ChatRequest chatRequest) {
