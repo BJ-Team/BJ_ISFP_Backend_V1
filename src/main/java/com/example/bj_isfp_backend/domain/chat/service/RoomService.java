@@ -5,4 +5,5 @@ import com.corundumstudio.socketio.SocketIOServer;
 
 public interface RoomService {
     void joinRoom(SocketIOClient socketIOClient, SocketIOServer socketIOServer, Long postId);
+    void leaveRoom(SocketIOClient socketIOClient, SocketIOServer socketIOServer, Long postId);
 }
