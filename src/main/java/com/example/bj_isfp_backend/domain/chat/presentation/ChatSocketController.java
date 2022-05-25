@@ -22,11 +22,6 @@ public class ChatSocketController {
     private final RoomService roomService;
     private final UserFacade userFacade;
 
-    @SocketMapping(endpoint = "join", requestCls = String.class)
-    public void joinRoom(SocketIOClient socketIOClient, SocketIOServer socketIOServer, Long postId) {
-        roomService.joinRoom(socketIOClient, socketIOServer, postId);
-    }
-
     @SocketMapping(endpoint = "message", requestCls = ChatRequest.class)
     public void sendMessage(SocketIOClient socketIOClient, SocketIOServer socketIOServer, ChatRequest chatRequest) {
 
@@ -34,5 +29,15 @@ public class ChatSocketController {
         Message message = messageService.saveMessage(chatRequest, user);
 
         chatSocketService.sendMessage(message, user, chatRequest.getRoomId(), socketIOServer);
+    }
+
+    @SocketMapping(endpoint = "join", requestCls = String.class)
+    public void joinRoom(SocketIOClient socketIOClient, SocketIOServer socketIOServer, Long postId) {
+        roomService.joinRoom(socketIOClient, socketIOServer, postId);
+    }
+
+    @SocketMapping(endpoint = "leave", requestCls = String.class)
+    public void leaveRoom(SocketIOClient socketIOClient, SocketIOServer socketIOServer, Long roomId) {
+        roomService.leaveRoom(socketIOClient, socketIOServer, roomId);
     }
 }

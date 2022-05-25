@@ -8,6 +8,7 @@ import com.example.bj_isfp_backend.domain.chat.domain.Room;
 import com.example.bj_isfp_backend.domain.chat.domain.repository.MemberRepository;
 import com.example.bj_isfp_backend.domain.chat.domain.repository.MessageRepository;
 import com.example.bj_isfp_backend.domain.chat.domain.repository.RoomRepository;
+import com.example.bj_isfp_backend.domain.chat.facade.MemberFacade;
 import com.example.bj_isfp_backend.domain.chat.facade.RoomFacade;
 import com.example.bj_isfp_backend.domain.chat.presentation.dto.MessageDto;
 import com.example.bj_isfp_backend.domain.post.domain.Post;
@@ -26,6 +27,7 @@ public class RoomServiceImpl implements RoomService {
     private final UserFacade userFacade;
     private final PostFacade postFacade;
     private final RoomFacade roomFacade;
+    private final MemberFacade memberFacade;
     private final RoomRepository roomRepository;
     private final MemberRepository memberRepository;
     private final MessageRepository messageRepository;
@@ -53,15 +55,26 @@ public class RoomServiceImpl implements RoomService {
                         .room(room)
                         .build());
 
-        Message message = messageRepository.save(
-                Message.builder()
-                        .content(user.getName() + "님이 입장하셨습니다.")
-                        .member(member)
-                        .room(room)
-                        .build());
+        Message message = saveMessage(user + "님이 입장하셨습니다.", member, room);
 
         socketIOClient.joinRoom(String.valueOf(room.getId()));
         sendEvent(socketIOClient, socketIOServer, message, user, room.getId());
+    }
+
+    @Override
+    @Transactional
+    public void leaveRoom(SocketIOClient socketIOClient, SocketIOServer socketIOServer, Long roomId) {
+
+        User user = userFacade.getCurrentUser(socketIOClient);
+        Room room = roomFacade.getRoomId(roomId);
+        Member member = memberFacade.getMemberByUserAndRoom(user, room);
+
+        Message message = saveMessage(user + "님이 퇴장하셨습니다.", member, room);
+
+        message.updateMemberNull(member);
+        memberRepository.delete(member);
+        socketIOClient.leaveRoom(String.valueOf(roomId));
+        sendEvent(socketIOClient, socketIOServer, message, user, roomId);
     }
 
     private void sendEvent(SocketIOClient socketIOClient, SocketIOServer socketIOServer, Message message, User user, Long roomId) {
@@ -78,5 +91,14 @@ public class RoomServiceImpl implements RoomService {
                 .forEach(client -> client.sendEvent(SocketProperty.MESSAGE_KEY, messageDto));
 
         socketIOClient.sendEvent(SocketProperty.ROOM_KEY, roomId);
+    }
+
+    private Message saveMessage(String content, Member member, Room room) {
+        return messageRepository.save(
+                Message.builder()
+                        .content(content)
+                        .member(member)
+                        .room(room)
+                        .build());
     }
 }
