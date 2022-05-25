@@ -40,4 +40,8 @@ public class Message {
         this.member = member;
         this.room = room;
     }
+
+    public void updateMemberNull(Member member) {
+        this.member = null;
+    }
 }
