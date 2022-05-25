@@ -39,7 +39,6 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.save(
                 Message.builder()
                         .content(chatRequest.getMessage())
-                        .createTime(room.getPost().getCreateTime())
                         .member(member)
                         .room(room)
                         .build());
