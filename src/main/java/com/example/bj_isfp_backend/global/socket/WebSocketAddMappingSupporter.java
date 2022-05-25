@@ -9,6 +9,8 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,8 +46,7 @@ public class WebSocketAddMappingSupporter {
             Class<?> dtoClass = socketMapping.requestCls();
 
             socketIOServer.addEventListener(endpoint, dtoClass, ((client, data, ackSender) -> {
-                String requestTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul"))
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+                String requestTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
                 String log = String.format("%s :: [%s] ", requestTime, method.getName());
                 System.out.println(log);
 
