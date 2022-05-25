@@ -7,6 +7,7 @@ import com.example.bj_isfp_backend.domain.chat.domain.repository.MessageReposito
 import com.example.bj_isfp_backend.domain.chat.domain.repository.RoomRepository;
 import com.example.bj_isfp_backend.domain.chat.exception.RoomNotFoundException;
 import com.example.bj_isfp_backend.domain.chat.facade.MemberFacade;
+import com.example.bj_isfp_backend.domain.chat.facade.RoomFacade;
 import com.example.bj_isfp_backend.domain.chat.presentation.dto.request.ChatRequest;
 import com.example.bj_isfp_backend.domain.chat.presentation.dto.response.MessageListResponse;
 import com.example.bj_isfp_backend.domain.chat.presentation.dto.response.MessageListResponse.MessageResponse;
@@ -23,19 +24,16 @@ import java.util.stream.Collectors;
 @Service
 public class MessageServiceImpl implements MessageService {
 
-
-    private final RoomRepository roomRepository;
     private final MemberFacade memberFacade;
     private final UserFacade userFacade;
+    private final RoomFacade roomFacade;
     private final MessageRepository messageRepository;
 
     @Override
     @Transactional
     public Message saveMessage(ChatRequest chatRequest, User user) {
 
-        Room room = roomRepository.findById(chatRequest.getRoomId())
-                .orElseThrow(() -> RoomNotFoundException.EXCEPTION);
-
+        Room room = roomFacade.getRoomId(chatRequest.getRoomId());
         Member member = memberFacade.getMemberByUserAndRoom(user, room);
 
         return messageRepository.save(
@@ -52,8 +50,7 @@ public class MessageServiceImpl implements MessageService {
     public MessageListResponse queryMessage(Long roomId) {
 
         User user = userFacade.getCurrentUser();
-        Room room = roomRepository.findById(roomId)
-                .orElseThrow(() -> RoomNotFoundException.EXCEPTION);
+        Room room = roomFacade.getRoomId(roomId);
 
         memberFacade.isEmptyMessageByUserAndRoom(user, room);
 
