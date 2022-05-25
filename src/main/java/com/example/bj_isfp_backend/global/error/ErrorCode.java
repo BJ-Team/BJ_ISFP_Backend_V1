@@ -31,6 +31,7 @@ public enum ErrorCode {
     REFRESH_TOKEN_NOT_FOUND(404, "JWT-404-1", "RefreshToken Not Found"),
 
     ROOM_NOT_FOUND(404, "ROOM-404-1", "Room Not Found"),
+    ALREADY_JOIN_ROOM(409, "ROOM-409-1", "Already Join Room"),
 
     MEMBER_NOT_FOUND(404, "MEMBER-404-1", "Member Not Found");
 
