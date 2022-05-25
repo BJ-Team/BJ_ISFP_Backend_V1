@@ -27,7 +27,7 @@ public class NotificationServiceImpl implements NotificationService {
         NotificationEntity notification = notificationRepository.findById(notificationId)
                 .orElseThrow(() -> NotificationNotFoundException.EXCEPTION);
 
-        notification.isWatched();
+        notification.updateWatchTure();
     }
 
     @Override
