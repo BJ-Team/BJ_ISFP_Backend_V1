@@ -32,7 +32,6 @@ jobs:
       - name: publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@3.04
         with:
-          name: freshman
           dockerfile: ./Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
