@@ -33,12 +33,16 @@ dependencies {
     implementation 'com.querydsl:querydsl-jpa'
     annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
     annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
-    
+
     implementation 'com.google.firebase:firebase-admin:8.1.0'
 
     implementation 'com.corundumstudio.socketio:netty-socketio:1.7.19'
 
     runtimeOnly 'mysql:mysql-connector-java'
+}
+
+jar {
+    enabled = false
 }
 
 tasks.named('test') {
