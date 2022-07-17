@@ -27,16 +27,3 @@ jwt:
 
 firebase:
   path: ${FCM_PATH}
-
-aws:
-  s3:
-    access-key: ${IAM_ACCESS_KEY}
-    secret-key: ${IAM_SECRET_KEY}
-    bucket: ${BUCKET}
-    static: ${IAM_REGION}
-  stack:
-    auto: false
-
-socket:
-  port: ${SOCKET_PORT}
-
