@@ -27,26 +27,27 @@ jobs:
         with:
           arguments: |
             build
+            
+      - name: Publish on Docker Hub
+        run: docker build -t jaemin05/isfp --push .
 
-      - name: publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@3.04
-        with:
-          name: isfp
-          dockerfile: ./Dockerfile
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          registry: ${{ secrets.DOCKER_REGISTRY }}
-          env: |
-            DB_URL: ${{ secrets.DB_URL }}
-            DB_USERNAME: ${{ secrets.DB_USERNAME }}
-            DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-            REDIS_PORT: ${{ secrets.REDIS_PORT }}
-            REDIS_HOST: ${{ secrets.REDIS_HOST }}
-            JWT_SECRET: ${{ secrets.JWT_SECRET }}
-            JWT_ACCESS_EXP: ${{ secrets.JWT_ACCESS_EXP }}
-            JWT_REFRESH_EXP: ${{ secrets.JWT_REFRESH_EXP }}
-            JWT_HEADER: ${{ secrets.JWT_HEADER }}
-            JWT_PREFIX: ${{ secrets.JWT_PREFIX }}
-            FCM_PATH: ${{ secrets.FCM_PATH }}
-            
-            
+      #- name: publish to Registry
+      #  uses: elgohr/Publish-Docker-Github-Action@3.04
+      #  with:
+      #    name: isfp
+      #    dockerfile: ./Dockerfile
+      #    username: ${{ secrets.DOCKER_USERNAME }}
+      #    password: ${{ secrets.DOCKER_PASSWORD }}
+      #    registry: ${{ secrets.DOCKER_REGISTRY }}
+      #    env: |
+      #      DB_URL: ${{ secrets.DB_URL }}
+      #      DB_USERNAME: ${{ secrets.DB_USERNAME }}
+      #      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      #      REDIS_PORT: ${{ secrets.REDIS_PORT }}
+      #     REDIS_HOST: ${{ secrets.REDIS_HOST }}
+      #      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      #      JWT_ACCESS_EXP: ${{ secrets.JWT_ACCESS_EXP }}
+      #      JWT_REFRESH_EXP: ${{ secrets.JWT_REFRESH_EXP }}
+      #     JWT_HEADER: ${{ secrets.JWT_HEADER }}
+      #      JWT_PREFIX: ${{ secrets.JWT_PREFIX }}
+      #      FCM_PATH: ${{ secrets.FCM_PATH }}
