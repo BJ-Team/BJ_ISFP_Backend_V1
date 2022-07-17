@@ -28,8 +28,11 @@ jobs:
           arguments: |
             build
             
-      - name: Publish on Docker Hub
-        run: docker build -t jaemin05/isfp --push .
+      - name: Docker Build
+        run: docker build -t jaemin05/isfp .
+
+      - name: Push on Dockerhub
+        run: docker push jaemin05/isfp
 
       #- name: publish to Registry
       #  uses: elgohr/Publish-Docker-Github-Action@3.04
