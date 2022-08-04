@@ -63,4 +63,12 @@ public class Post extends BaseTimeEntity {
     public void reported() {
         this.isReported = true;
     }
+
+    public void updatePost(String title, String content, Category category, Integer price, String postImage) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+        this.price = price;
+        if (postImage != null) this.postImage = postImage;
+    }
 }
