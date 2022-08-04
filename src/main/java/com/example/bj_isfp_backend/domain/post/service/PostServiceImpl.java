@@ -3,7 +3,7 @@ package com.example.bj_isfp_backend.domain.post.service;
 import com.example.bj_isfp_backend.domain.post.domain.Post;
 import com.example.bj_isfp_backend.domain.post.domain.repository.PostRepository;
 import com.example.bj_isfp_backend.domain.post.exception.PostNotFoundException;
-import com.example.bj_isfp_backend.domain.post.presentation.dto.request.CreatePostRequest;
+import com.example.bj_isfp_backend.domain.post.presentation.dto.request.PostRequest;
 import com.example.bj_isfp_backend.domain.post.presentation.dto.response.QueryPostResponse;
 import com.example.bj_isfp_backend.domain.post.presentation.dto.response.QueryPostResponse.PostResponse;
 import com.example.bj_isfp_backend.domain.user.domain.User;
@@ -24,7 +24,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     @Transactional
-    public void createPost(CreatePostRequest createPostRequest) {
+    public void createPost(PostRequest createPostRequest) {
 
         User user = userFacade.getCurrentUser();
 
@@ -63,5 +63,25 @@ public class PostServiceImpl implements PostService {
         return QueryPostResponse.builder()
                 .postResponse(postList)
                 .build();
+    }
+
+    @Override
+    @Transactional
+    public void updatePost(Long postId, PostRequest postRequest) {
+
+        User user = userFacade.getCurrentUser();
+
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
+
+        if (!post.getUser().equals(user))
+            throw InvalidUserException.EXCEPTION;
+
+        post.updatePost(
+                postRequest.getTitle(),
+                postRequest.getContent(),
+                postRequest.getCategory(),
+                postRequest.getPrice(),
+                postRequest.getPostImage());
     }
 }
