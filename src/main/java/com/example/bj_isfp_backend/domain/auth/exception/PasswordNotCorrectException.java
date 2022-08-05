@@ -4,7 +4,7 @@ import com.example.bj_isfp_backend.global.error.BjISFPException;
 import com.example.bj_isfp_backend.global.error.ErrorCode;
 
 public class PasswordNotCorrectException extends BjISFPException {
-    public static final PasswordNotCorrectException EXCEPTION =
+    public static final BjISFPException EXCEPTION =
             new PasswordNotCorrectException();
 
     private PasswordNotCorrectException() {
