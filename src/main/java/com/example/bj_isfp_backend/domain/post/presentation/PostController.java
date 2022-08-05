@@ -17,8 +17,8 @@ public class PostController {
     private final PostService postService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/make")
-    public void makePost(@RequestBody @Valid PostRequest postRequest) {
+    @PostMapping
+    public void createPost(@RequestBody @Valid PostRequest postRequest) {
         postService.createPost(postRequest);
     }
 
