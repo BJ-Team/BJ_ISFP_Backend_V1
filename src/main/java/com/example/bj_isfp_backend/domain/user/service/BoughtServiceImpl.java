@@ -1,6 +1,6 @@
 package com.example.bj_isfp_backend.domain.user.service;
 
-import com.example.bj_isfp_backend.domain.post.domain.repository.BuyRepository;
+import com.example.bj_isfp_backend.domain.buy.domain.repository.BuyRepository;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
 import com.example.bj_isfp_backend.domain.user.presentation.dto.response.QueryUserPostResponse;

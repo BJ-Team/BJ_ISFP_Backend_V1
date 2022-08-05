@@ -4,7 +4,7 @@ import com.example.bj_isfp_backend.global.error.BjISFPException;
 import com.example.bj_isfp_backend.global.error.ErrorCode;
 
 public class UploadFileFailedException extends BjISFPException {
-    public static final UploadFileFailedException EXCEPTION =
+    public static final BjISFPException EXCEPTION =
             new UploadFileFailedException();
 
     private UploadFileFailedException() {

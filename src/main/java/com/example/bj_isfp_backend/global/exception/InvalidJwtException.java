@@ -4,7 +4,7 @@ import com.example.bj_isfp_backend.global.error.BjISFPException;
 import com.example.bj_isfp_backend.global.error.ErrorCode;
 
 public class InvalidJwtException extends BjISFPException {
-    public static final InvalidJwtException EXCEPTION =
+    public static final BjISFPException EXCEPTION =
             new InvalidJwtException();
 
     private InvalidJwtException() {

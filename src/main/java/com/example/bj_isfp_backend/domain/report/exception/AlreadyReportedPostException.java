@@ -4,7 +4,7 @@ import com.example.bj_isfp_backend.global.error.BjISFPException;
 import com.example.bj_isfp_backend.global.error.ErrorCode;
 
 public class AlreadyReportedPostException extends BjISFPException {
-    public static final AlreadyReportedPostException EXCEPTION =
+    public static final BjISFPException EXCEPTION =
             new AlreadyReportedPostException();
 
     private AlreadyReportedPostException() {
