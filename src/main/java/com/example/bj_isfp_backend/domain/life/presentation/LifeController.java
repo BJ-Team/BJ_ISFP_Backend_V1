@@ -28,7 +28,7 @@ public class LifeController {
         lifeService.deleteLife(lifeId);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public QueryLifeResponse queryPost() {
         return lifeService.queryLife();
     }
