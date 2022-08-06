@@ -36,6 +36,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-admin:8.1.0'
 
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-aws-autoconfigure:2.2.6.RELEASE'
+
     implementation 'com.corundumstudio.socketio:netty-socketio:1.7.19'
 
     runtimeOnly 'mysql:mysql-connector-java'
