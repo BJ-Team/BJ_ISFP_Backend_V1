@@ -28,6 +28,9 @@ public enum ErrorCode {
 
     NOTIFICATION_NOT_FOUND(404, "NOTIFICATION-404-1", "Notification Not Found"),
 
+    IMAGE_VALUE_NOT_FOUND(404, "IMAGE-404-1", "Image Value Not Found"),
+    SAVE_IMAGE_FAILED(400, "IMAGE-400-1", "Save Image Failed"),
+
     EXPIRED_JWT(401, "JWT-401-1", "Expired Jwt"),
     INVALID_JWT(401, "JWT-401-2", "Invalid Jwt"),
     REFRESH_TOKEN_NOT_FOUND(404, "JWT-404-1", "RefreshToken Not Found"),
