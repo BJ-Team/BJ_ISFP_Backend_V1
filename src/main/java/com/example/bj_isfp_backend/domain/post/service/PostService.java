@@ -1,7 +1,7 @@
 package com.example.bj_isfp_backend.domain.post.service;
 
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO;
 import com.example.bj_isfp_backend.domain.post.presentation.dto.request.PostRequest;
-import com.example.bj_isfp_backend.domain.post.presentation.dto.response.QueryPostResponse;
 
 public interface PostService {
 
@@ -9,7 +9,8 @@ public interface PostService {
 
     void deletePost(Long postId);
 
-    QueryPostResponse queryPostList();
+    PostListVO queryPostList();
+
 
     void updatePost(Long postId, PostRequest postRequest);
 }
