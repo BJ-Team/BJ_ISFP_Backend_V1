@@ -26,7 +26,7 @@ public class LifeRepositoryCustomImpl implements LifeRepositoryCustom {
                         user.id
                 ))
                 .from(life)
-                .join(user)
+                .leftJoin(life.user, user)
                 .fetch();
     }
 }
