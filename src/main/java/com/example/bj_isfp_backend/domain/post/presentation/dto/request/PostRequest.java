@@ -26,7 +26,5 @@ public class PostRequest {
     @NotBlank(message = "price 필수 입력입니다.")
     private Integer price;
 
-    private String location;
-
     private String postImage;
 }
