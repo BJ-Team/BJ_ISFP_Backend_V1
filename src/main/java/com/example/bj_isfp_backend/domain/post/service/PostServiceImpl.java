@@ -2,10 +2,11 @@ package com.example.bj_isfp_backend.domain.post.service;
 
 import com.example.bj_isfp_backend.domain.post.domain.Post;
 import com.example.bj_isfp_backend.domain.post.domain.repository.PostRepository;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostDetailsVO;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO.PostVO;
 import com.example.bj_isfp_backend.domain.post.exception.PostNotFoundException;
 import com.example.bj_isfp_backend.domain.post.presentation.dto.request.PostRequest;
-import com.example.bj_isfp_backend.domain.post.presentation.dto.response.QueryPostResponse;
-import com.example.bj_isfp_backend.domain.post.presentation.dto.response.QueryPostResponse.PostResponse;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.exception.InvalidUserException;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
@@ -34,6 +35,8 @@ public class PostServiceImpl implements PostService {
                         .content(createPostRequest.getContent())
                         .category(createPostRequest.getCategory())
                         .price(createPostRequest.getPrice())
+                        .location(createPostRequest.getLocation())
+                        .postImage(createPostRequest.getPostImage())
                         .user(user)
                         .build()
         );
@@ -56,13 +59,18 @@ public class PostServiceImpl implements PostService {
 
     @Override
     @Transactional(readOnly = true)
-    public QueryPostResponse queryPostList() {
+    public PostListVO queryPostList() {
 
-        List<PostResponse> postList = postRepository.queryPostList();
+        List<PostVO> postList = postRepository.queryPostList();
 
-        return QueryPostResponse.builder()
-                .postResponse(postList)
+        return PostListVO.builder()
+                .postVO(postList)
                 .build();
+    }
+
+    @Override
+    public PostDetailsVO queryPostDetails(Long postId) {
+        return postRepository.queryPostDetails(postId);
     }
 
     @Override
@@ -82,6 +90,7 @@ public class PostServiceImpl implements PostService {
                 postRequest.getContent(),
                 postRequest.getCategory(),
                 postRequest.getPrice(),
+                postRequest.getLocation(),
                 postRequest.getPostImage());
     }
 }
