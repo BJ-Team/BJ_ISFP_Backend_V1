@@ -1,7 +1,7 @@
 package com.example.bj_isfp_backend.domain.post.presentation;
 
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO;
 import com.example.bj_isfp_backend.domain.post.presentation.dto.request.PostRequest;
-import com.example.bj_isfp_backend.domain.post.presentation.dto.response.QueryPostResponse;
 import com.example.bj_isfp_backend.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ public class PostController {
     }
 
     @GetMapping
-    public QueryPostResponse queryPost() {
+    public PostListVO queryPost() {
         return postService.queryPostList();
     }
 
