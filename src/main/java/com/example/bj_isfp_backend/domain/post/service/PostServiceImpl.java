@@ -35,7 +35,7 @@ public class PostServiceImpl implements PostService {
                         .content(createPostRequest.getContent())
                         .category(createPostRequest.getCategory())
                         .price(createPostRequest.getPrice())
-                        .location(createPostRequest.getLocation())
+                        .location(user.getLocation())
                         .postImage(createPostRequest.getPostImage())
                         .user(user)
                         .build()
@@ -90,7 +90,7 @@ public class PostServiceImpl implements PostService {
                 postRequest.getContent(),
                 postRequest.getCategory(),
                 postRequest.getPrice(),
-                postRequest.getLocation(),
+                user.getLocation(),
                 postRequest.getPostImage());
     }
 }

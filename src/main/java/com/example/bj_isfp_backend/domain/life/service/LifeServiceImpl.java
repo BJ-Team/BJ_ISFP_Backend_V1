@@ -2,9 +2,10 @@ package com.example.bj_isfp_backend.domain.life.service;
 
 import com.example.bj_isfp_backend.domain.life.domain.Life;
 import com.example.bj_isfp_backend.domain.life.domain.repository.LifeRepository;
+import com.example.bj_isfp_backend.domain.life.domain.repository.vo.LifeListVO;
+import com.example.bj_isfp_backend.domain.life.domain.repository.vo.LifeListVO.LifeVO;
 import com.example.bj_isfp_backend.domain.life.exception.LifeNotFoundException;
 import com.example.bj_isfp_backend.domain.life.presentation.dto.request.LifeRequest;
-import com.example.bj_isfp_backend.domain.life.presentation.dto.response.QueryLifeResponse;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.exception.InvalidUserException;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
@@ -31,6 +32,7 @@ public class LifeServiceImpl implements LifeService {
                 Life.builder()
                         .content(lifeRequest.getContent())
                         .category(lifeRequest.getCategory())
+                        .location(user.getLocation())
                         .lifeImage(lifeRequest.getLifeImage())
                         .user(user)
                         .build()
@@ -50,14 +52,15 @@ public class LifeServiceImpl implements LifeService {
         life.updateLife(
                 lifeRequest.getContent(),
                 lifeRequest.getCategory(),
+                user.getLocation(),
                 lifeRequest.getLifeImage());
     }
 
     @Override
-    public QueryLifeResponse queryLife() {
-        List<QueryLifeResponse.LifeResponse> lifeList = lifeRepository.queryLifeList();
+    public LifeListVO queryLife() {
+        List<LifeVO> lifeList = lifeRepository.queryLifeList();
 
-        return QueryLifeResponse.builder()
+        return LifeListVO.builder()
                 .lifeResponses(lifeList)
                 .build();
     }
