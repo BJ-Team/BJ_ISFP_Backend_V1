@@ -1,6 +1,6 @@
 package com.example.bj_isfp_backend.domain.post.presentation.dto.request;
 
-import com.example.bj_isfp_backend.domain.post.domain.type.Category;
+import com.example.bj_isfp_backend.domain.post.domain.type.PostCategory;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,10 +21,12 @@ public class PostRequest {
     private String content;
 
     @NotNull(message = "category는 필수 입력입니다.")
-    private Category category;
+    private PostCategory category;
 
     @NotBlank(message = "price 필수 입력입니다.")
     private Integer price;
+
+    private String location;
 
     private String postImage;
 }
