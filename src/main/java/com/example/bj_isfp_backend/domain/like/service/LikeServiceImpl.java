@@ -30,6 +30,8 @@ public class LikeServiceImpl implements LikeService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
+        post.liked();
+
         likeRepository.save(
                 Like.builder()
                         .user(user)
