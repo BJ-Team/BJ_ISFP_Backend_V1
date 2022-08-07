@@ -1,6 +1,6 @@
 package com.example.bj_isfp_backend.domain.post.domain;
 
-import com.example.bj_isfp_backend.domain.post.domain.type.Category;
+import com.example.bj_isfp_backend.domain.post.domain.type.PostCategory;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
@@ -29,10 +29,13 @@ public class Post extends BaseTimeEntity {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private Category category;
+    private PostCategory category;
 
     @Column(nullable = false)
     private Integer price;
+
+    @Column(nullable = false)
+    private String location;
 
     private String postImage;
 
@@ -42,16 +45,20 @@ public class Post extends BaseTimeEntity {
     @ColumnDefault("false")
     private boolean isReported;
 
+    @ColumnDefault("false")
+    private boolean isLiked;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     @Builder
-    public Post(String title, String content, Category category, Integer price, String postImage, User user) {
+    public Post(String title, String content, PostCategory category, Integer price, String location, String postImage, User user) {
         this.title = title;
         this.content = content;
         this.category = category;
         this.price = price;
+        this.location = location;
         this.user = user;
         if (postImage != null) this.postImage = postImage;
     }
@@ -64,11 +71,16 @@ public class Post extends BaseTimeEntity {
         this.isReported = true;
     }
 
-    public void updatePost(String title, String content, Category category, Integer price, String postImage) {
+    public void liked() {
+        this.isLiked = true;
+    }
+
+    public void updatePost(String title, String content, PostCategory category, Integer price, String location, String postImage) {
         this.title = title;
         this.content = content;
         this.category = category;
         this.price = price;
+        this.location = location;
         if (postImage != null) this.postImage = postImage;
     }
 }
