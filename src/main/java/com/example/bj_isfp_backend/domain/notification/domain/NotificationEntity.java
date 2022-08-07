@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,13 +20,15 @@ public class NotificationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 50, nullable = false)
+    @NotNull
+    @Length(max = 50)
     private String title;
 
-    @Column(length = 300, nullable = false)
+    @NotNull
+    @Length(max = 300)
     private String content;
 
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     private Boolean isWatch;
 
     @NotNull
