@@ -6,14 +6,10 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,13 +23,15 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private String accountId;
 
-    @Column(length = 60, nullable = false)
+    @NotNull
+    @Length(max = 60)
     private String password;
 
-    @Column(length = 20, nullable = false)
+    @NotNull
+    @Length(max = 20)
     private String name;
 
-    @Column(nullable = false)
+    @NotNull
     private String location;
 
     @Enumerated(EnumType.STRING)
