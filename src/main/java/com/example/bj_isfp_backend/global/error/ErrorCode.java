@@ -28,6 +28,8 @@ public enum ErrorCode {
 
     NOTIFICATION_NOT_FOUND(404, "NOTIFICATION-404-1", "Notification Not Found"),
 
+    COMMENT_NOT_FOUND(404, "COMMENT-404-1", "Comment Not Found"),
+
     IMAGE_VALUE_NOT_FOUND(404, "IMAGE-404-1", "Image Value Not Found"),
     SAVE_IMAGE_FAILED(400, "IMAGE-400-1", "Save Image Failed"),
 
