@@ -13,17 +13,17 @@ import javax.validation.constraints.Size;
 public class PostRequest {
 
     @Size(max = 50, message = "title은 50자 이내로 입력해주세요.")
-    @NotBlank(message = "title 필수 입력입니다.")
+    @NotBlank(message = "title은 필수 입력입니다.")
     private String title;
 
-    @Size(max = 300, message = "title은 300자 이내로 입력해주세요.")
-    @NotBlank(message = "content 필수 입력입니다.")
+    @Size(max = 300, message = "content는 300자 이내로 입력해주세요.")
+    @NotBlank(message = "content는 필수 입력입니다.")
     private String content;
 
     @NotNull(message = "category는 필수 입력입니다.")
     private PostCategory category;
 
-    @NotBlank(message = "price 필수 입력입니다.")
+    @NotBlank(message = "price는 필수 입력입니다.")
     private Integer price;
 
     private String postImage;

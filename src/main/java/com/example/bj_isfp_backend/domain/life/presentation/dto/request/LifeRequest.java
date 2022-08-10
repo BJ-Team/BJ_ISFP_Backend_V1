@@ -12,8 +12,8 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class LifeRequest {
 
-    @Size(max = 300, message = "title은 300자 이내로 입력해주세요.")
-    @NotBlank(message = "content 필수 입력입니다.")
+    @Size(max = 300, message = "content는 300자 이내로 입력해주세요.")
+    @NotBlank(message = "content는 필수 입력입니다.")
     private String content;
 
     @NotNull(message = "category는 필수 입력입니다.")
