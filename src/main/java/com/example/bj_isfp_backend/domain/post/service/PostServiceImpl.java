@@ -5,7 +5,7 @@ import com.example.bj_isfp_backend.domain.post.domain.repository.PostRepository;
 import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostDetailsVO;
 import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO;
 import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO.PostVO;
-import com.example.bj_isfp_backend.domain.post.exception.PostNotFoundException;
+import com.example.bj_isfp_backend.domain.post.facade.PostFacade;
 import com.example.bj_isfp_backend.domain.post.presentation.dto.request.PostRequest;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.exception.InvalidUserException;
@@ -21,6 +21,7 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
 
     private final UserFacade userFacade;
+    private final PostFacade postFacade;
     private final PostRepository postRepository;
 
     @Override
@@ -48,8 +49,7 @@ public class PostServiceImpl implements PostService {
 
         User user = userFacade.getCurrentUser();
 
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
+        Post post = postFacade.getPostById(postId);
 
         if (!post.getUser().equals(user))
             throw InvalidUserException.EXCEPTION;
@@ -79,8 +79,7 @@ public class PostServiceImpl implements PostService {
 
         User user = userFacade.getCurrentUser();
 
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
+        Post post = postFacade.getPostById(postId);
 
         if (!post.getUser().equals(user))
             throw InvalidUserException.EXCEPTION;
