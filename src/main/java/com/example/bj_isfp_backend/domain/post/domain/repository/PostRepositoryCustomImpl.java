@@ -1,10 +1,11 @@
 package com.example.bj_isfp_backend.domain.post.domain.repository;
 
 
-import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostDetailsVO;
-import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO.PostVO;
-import com.example.bj_isfp_backend.domain.post.domain.repository.vo.QPostDetailsVO;
-import com.example.bj_isfp_backend.domain.post.domain.repository.vo.QPostListVO_PostVO;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostDetailsVO.PostVO;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO.PostResponse;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.QPostDetailsVO_PostVO;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.QPostDetailsVO_Writer;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.QPostListVO_PostResponse;
 import com.example.bj_isfp_backend.domain.user.domain.User;
 import com.example.bj_isfp_backend.domain.user.facade.UserFacade;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -22,11 +23,11 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
     private final UserFacade userFacade;
 
     @Override
-    public List<PostVO> queryPostList() {
+    public List<PostResponse> queryPostList() {
         User currentUser = userFacade.getCurrentUser();
 
         return jpaQueryFactory.select(
-                        new QPostListVO_PostVO(
+                        new QPostListVO_PostResponse(
                                 post.title,
                                 post.location,
                                 post.isReported,
@@ -39,25 +40,29 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
                 .where(
                         post.location.eq(currentUser.getLocation())
                 )
+                .orderBy(post.id.desc())
                 .fetch();
     }
 
     @Override
-    public PostDetailsVO queryPostDetails(Long postId) {
-        return jpaQueryFactory.select(
-                        new QPostDetailsVO(
+    public PostVO queryPostDetails(Long postId) {
+        return jpaQueryFactory
+                .select(
+                        new QPostDetailsVO_PostVO(
                                 post.title,
                                 post.content,
                                 post.category,
                                 post.location,
                                 post.createTime,
-                                post.isReported,
+                                post.isLiked,
                                 post.price,
                                 post.postImage,
-                                user.name,
-                                user.userProfile,
-                                user.id
-                        ))
+                                new QPostDetailsVO_Writer(
+                                        user.id,
+                                        user.name,
+                                        user.userProfile
+                                ))
+                )
                 .from(post)
                 .leftJoin(post.user, user)
                 .where(
