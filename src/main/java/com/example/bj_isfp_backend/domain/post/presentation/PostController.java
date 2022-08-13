@@ -1,6 +1,6 @@
 package com.example.bj_isfp_backend.domain.post.presentation;
 
-import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostDetailsVO;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostDetailsVO.PostVO;
 import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO;
 import com.example.bj_isfp_backend.domain.post.presentation.dto.request.PostRequest;
 import com.example.bj_isfp_backend.domain.post.service.PostService;
@@ -35,7 +35,7 @@ public class PostController {
     }
 
     @GetMapping("/{post-id}")
-    public PostDetailsVO queryPostDetails(@PathVariable("post-id") Long postId) {
+    public PostVO queryPostDetails(@PathVariable("post-id") Long postId) {
         return postService.queryPostDetails(postId);
     }
 
