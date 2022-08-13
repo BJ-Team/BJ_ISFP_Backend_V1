@@ -1,7 +1,8 @@
 package com.example.bj_isfp_backend.domain.life.presentation;
 
+import com.example.bj_isfp_backend.domain.life.domain.repository.vo.LifeDetailsVO.LifeVO;
+import com.example.bj_isfp_backend.domain.life.domain.repository.vo.LifeListVO;
 import com.example.bj_isfp_backend.domain.life.presentation.dto.request.LifeRequest;
-import com.example.bj_isfp_backend.domain.life.presentation.dto.response.QueryLifeResponse;
 import com.example.bj_isfp_backend.domain.life.service.LifeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,8 +30,13 @@ public class LifeController {
     }
 
     @GetMapping("/list")
-    public QueryLifeResponse queryPost() {
+    public LifeListVO queryLife() {
         return lifeService.queryLife();
+    }
+
+    @GetMapping("/list/{life-id}")
+    public LifeVO queryLifeDetails(@PathVariable(name = "life-id") Long lifeId) {
+        return lifeService.queryLifeDetails(lifeId);
     }
 
     @PatchMapping("/{life-id}")
