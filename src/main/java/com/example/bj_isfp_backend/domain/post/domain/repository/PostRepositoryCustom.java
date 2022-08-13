@@ -1,12 +1,12 @@
 package com.example.bj_isfp_backend.domain.post.domain.repository;
 
-import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostDetailsVO;
-import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO.PostVO;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostDetailsVO.PostVO;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO;
 
 import java.util.List;
 
 public interface PostRepositoryCustom {
-    List<PostVO> queryPostList();
+    List<PostListVO.PostResponse> queryPostList();
 
-    PostDetailsVO queryPostDetails(Long postId);
+    PostVO queryPostDetails(Long postId);
 }
