@@ -2,9 +2,8 @@ package com.example.bj_isfp_backend.domain.post.service;
 
 import com.example.bj_isfp_backend.domain.post.domain.Post;
 import com.example.bj_isfp_backend.domain.post.domain.repository.PostRepository;
-import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostDetailsVO;
+import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostDetailsVO.PostVO;
 import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO;
-import com.example.bj_isfp_backend.domain.post.domain.repository.vo.PostListVO.PostVO;
 import com.example.bj_isfp_backend.domain.post.facade.PostFacade;
 import com.example.bj_isfp_backend.domain.post.presentation.dto.request.PostRequest;
 import com.example.bj_isfp_backend.domain.user.domain.User;
@@ -61,15 +60,15 @@ public class PostServiceImpl implements PostService {
     @Transactional(readOnly = true)
     public PostListVO queryPostList() {
 
-        List<PostVO> postList = postRepository.queryPostList();
+        List<PostListVO.PostResponse> postList = postRepository.queryPostList();
 
         return PostListVO.builder()
-                .postVO(postList)
+                .postList(postList)
                 .build();
     }
 
     @Override
-    public PostDetailsVO queryPostDetails(Long postId) {
+    public PostVO queryPostDetails(Long postId) {
         return postRepository.queryPostDetails(postId);
     }
 
