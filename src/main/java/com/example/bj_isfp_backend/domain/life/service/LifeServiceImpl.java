@@ -1,5 +1,8 @@
 package com.example.bj_isfp_backend.domain.life.service;
 
+import com.example.bj_isfp_backend.domain.commment.domain.Comment;
+import com.example.bj_isfp_backend.domain.commment.domain.repository.CommentRepository;
+import com.example.bj_isfp_backend.domain.commment.domain.repository.vo.CommentListVO.CommentVO;
 import com.example.bj_isfp_backend.domain.life.domain.Life;
 import com.example.bj_isfp_backend.domain.life.domain.repository.LifeRepository;
 import com.example.bj_isfp_backend.domain.life.domain.repository.vo.LifeDetailsVO.LifeVO;
@@ -23,6 +26,7 @@ public class LifeServiceImpl implements LifeService {
     private final UserFacade userFacade;
     private final LifeFacade lifeFacade;
     private final LifeRepository lifeRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     @Transactional
@@ -68,7 +72,21 @@ public class LifeServiceImpl implements LifeService {
 
     @Override
     public LifeVO queryLifeDetails(Long lifeId) {
-        return lifeRepository.queryLifeDetails(lifeId);
+        LifeVO lifeVO = lifeRepository.queryLifeDetails(lifeId);
+        List<CommentVO> commentVO = commentRepository.queryCommentList(lifeId);
+
+        lifeVO = LifeVO.builder()
+                .content(lifeVO.getContent())
+                .category(lifeVO.getCategory())
+                .createTime(lifeVO.getCreateTime())
+                .location(lifeVO.getLocation())
+                .lifeImage(lifeVO.getLifeImage())
+                .writer(lifeVO.getWriter())
+                .build();
+
+        lifeVO.getComment().addAll(commentVO);
+
+        return lifeVO;
     }
 
     @Override
@@ -77,9 +95,15 @@ public class LifeServiceImpl implements LifeService {
 
         User user = userFacade.getCurrentUser();
         Life life = lifeFacade.getLifeById(lifeId);
+        Comment comment = commentRepository.findAllByLife(life)
+                .orElse(null);
 
         if (!life.getUser().equals(user))
             throw InvalidUserException.EXCEPTION;
+
+        if (comment != null) {
+            commentRepository.delete(comment);
+        }
 
         lifeRepository.delete(life);
     }
