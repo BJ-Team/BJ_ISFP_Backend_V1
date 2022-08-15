@@ -1,6 +1,6 @@
 package com.example.bj_isfp_backend.domain.life.domain.repository.vo;
 
-import com.example.bj_isfp_backend.domain.commment.domain.Comment;
+import com.example.bj_isfp_backend.domain.commment.domain.repository.vo.CommentListVO.CommentVO;
 import com.example.bj_isfp_backend.domain.life.domain.type.LifeCategory;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.querydsl.core.annotations.QueryProjection;
@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -24,17 +26,17 @@ public class LifeDetailsVO {
         private final LocalDateTime createTime;
         private final String location;
         private final String lifeImage;
-        private final Comment comment;
         private final Writer writer;
 
+        private final List<CommentVO> comment = new ArrayList<>();
+
         @QueryProjection
-        public LifeVO(String content, LifeCategory category, LocalDateTime createTime, String location, String lifeImage, Comment comment, Writer writer) {
+        public LifeVO(String content, LifeCategory category, LocalDateTime createTime, String location, String lifeImage, Writer writer) {
             this.content = content;
             this.category = category;
             this.createTime = createTime;
             this.location = location;
             this.lifeImage = lifeImage;
-            this.comment = comment;
             this.writer = writer;
         }
     }
