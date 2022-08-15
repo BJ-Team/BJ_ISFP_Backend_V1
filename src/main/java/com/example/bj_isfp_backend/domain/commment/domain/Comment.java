@@ -1,8 +1,8 @@
 package com.example.bj_isfp_backend.domain.commment.domain;
 
 import com.example.bj_isfp_backend.domain.life.domain.Life;
-import com.example.bj_isfp_backend.domain.post.domain.Post;
 import com.example.bj_isfp_backend.domain.user.domain.User;
+import com.example.bj_isfp_backend.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Comment {
+public class Comment extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
