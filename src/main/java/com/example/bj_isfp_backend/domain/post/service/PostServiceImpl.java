@@ -69,7 +69,19 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostVO queryPostDetails(Long postId) {
-        return postRepository.queryPostDetails(postId);
+        PostVO postVO = postRepository.queryPostDetails(postId);
+
+        return PostVO.builder()
+                .title(postVO.getTitle())
+                .content(postVO.getContent())
+                .postCategory(postVO.getPostCategory())
+                .location(postVO.getLocation())
+                .createTime(postVO.getCreateTime())
+                .isLiked(postVO.isLiked())
+                .price(postVO.getPrice())
+                .postImage(postVO.getPostImage())
+                .writer(postVO.getWriter())
+                .build();
     }
 
     @Override
