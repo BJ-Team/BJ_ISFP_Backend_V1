@@ -44,19 +44,20 @@ public class LifeRepositoryCustomImpl implements LifeRepositoryCustom {
 
     @Override
     public LifeVO queryLifeDetails(Long lifeId) {
+
         return jpaQueryFactory
                 .select(new QLifeDetailsVO_LifeVO(
-                        life.content,
-                        life.category,
-                        life.createTime,
-                        life.location,
-                        life.lifeImage,
-                        life.comment,
-                        new QLifeDetailsVO_Writer(
-                                user.id,
-                                user.name,
-                                user.userProfile
-                        ))
+                                life.content,
+                                life.category,
+                                life.createTime,
+                                life.location,
+                                life.lifeImage,
+                                new QLifeDetailsVO_Writer(
+                                        user.id,
+                                        user.name,
+                                        user.userProfile
+                                )
+                        )
                 )
                 .from(life)
                 .leftJoin(life.user, user)
